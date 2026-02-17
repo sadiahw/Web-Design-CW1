@@ -1,0 +1,133 @@
+/* Reset default styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body styling */
+body {
+    background-color: #fff8f0;
+    color: #333;
+}
+
+/* Header navigation styling */
+header {
+    background-color: #d32f2f;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+header nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* Section styling */
+section {
+    padding: 50px 20px;
+}
+
+h2 {
+    color: #d32f2f;
+    margin-bottom: 20px;
+}
+
+/* Menu and cart items */
+.menu-item, .cart-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #b71c1c;
+}
+
+/* Footer styling */
+footer {
+    background-color: #d32f2f;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Inputs and select boxes */
+input, select {
+    padding: 5px;
+    margin: 5px 0;
+    width: 100%;
+}
+
+/* Tabs for menu categories */
+.tabs button {
+    padding: 10px 15px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+}
+
+.tabs button.active {
+    background-color: #b71c1c;
+}
+
+.tab-content {
+    display: none;
+    margin-top: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Map styling */
+.map {
+    width: 100%;
+    height: 300px;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header nav {
+        margin-top: 10px;
+    }
+
+    .menu-item, .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

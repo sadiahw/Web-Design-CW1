@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizza Planet - About Us</title>
+    <title>Pizza Planet - Checkout</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,12 +19,19 @@
 </header>
 
 <section>
-    <h2>About Us</h2>
-    <p>Pizza Planet is a family-owned pizza chain serving fresh, delicious pizzas since 1995. Our mission is to deliver happiness one slice at a time!</p>
+    <h2>Checkout</h2>
+    <div class="checkout-section">
+        <input type="text" placeholder="Full Name">
+        <input type="text" placeholder="Address">
+        <input type="text" placeholder="Card Number">
+        <button class="button" onclick="completeOrder()">Complete Order</button>
+    </div>
 </section>
 
 <footer>
     <p>&copy; 2026 Pizza Planet. All rights reserved.</p>
 </footer>
+
+<script src="script.js"></script>
 </body>
 </html>

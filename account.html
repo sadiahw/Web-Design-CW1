@@ -1,32 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Account</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Planet - Account</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<header>
+    <h1>Pizza Planet</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="account.html">Account</a>
+        <a href="checkout.html">Checkout</a>
+        <a href="about.html">About Us</a>
+    </nav>
+</header>
 
-<h2>My Account</h2>
+<section>
+    <h2>User Account</h2>
+    <div class="account-section">
+        <h3>Profile</h3>
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="Email">
 
-<!-- Profile -->
-<h3>Profile</h3>
-<p>Name: John Doe</p>
+        <h3>Order History</h3>
+        <ul>
+            <li>Margherita Pizza - $10</li>
+        </ul>
 
-<!-- Order History -->
-<h3>Order History</h3>
-<p>Order #001 - Pepperoni Pizza</p>
+        <h3>Saved Addresses</h3>
+        <input type="text" placeholder="Home Address">
 
-<!-- Saved Addresses -->
-<h3>Saved Addresses</h3>
-<p>Home: 123 Main Street</p>
+        <h3>Payment Methods</h3>
+        <input type="text" placeholder="Card Number">
 
-<!-- Payment Methods -->
-<h3>Payment Methods</h3>
-<p>Visa ending in 1234</p>
+        <h3>Favorite Orders</h3>
+        <p>Pepperoni Pizza</p>
 
-<!-- Favourite Orders -->
-<h3>Favourite Orders</h3>
-<p>Large BBQ Chicken Pizza</p>
+        <h3>Sign Up / Log In</h3>
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <button class="button">Sign Up / Log In</button>
+    </div>
+</section>
 
+<footer>
+    <p>&copy; 2026 Pizza Planet. All rights reserved.</p>
+</footer>
 </body>
 </html>

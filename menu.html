@@ -2,56 +2,105 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Menu - Pizza Palace</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Planet - Menu</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <h1>Pizza Planet</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="account.html">Account</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="about.html">About Us</a>
+        </nav>
+    </header>
 
-<!-- ================= NAVIGATION ================= -->
-<header>
-    <nav>
-        <h1>🍕 Pizza Palace</h1>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="locations.html">Locations</a></li>
-            <li><a href="customer-service.html">Customer Service</a></li>
-            <li><a href="account.html">My Account</a></li>
-        </ul>
-    </nav>
-</header>
+    <section>
+        <h2>Menu</h2>
 
-<!-- ================= MENU SECTION ================= -->
-<section>
-    <h2>Our Menu</h2>
+        <!-- Menu Tabs -->
+        <div class="tabs">
+            <button class="tablink active" onclick="openTab(event, 'pizza')">Pizza</button>
+            <button class="tablink" onclick="openTab(event, 'salad')">Salad</button>
+            <button class="tablink" onclick="openTab(event, 'sauces')">Sauces</button>
+            <button class="tablink" onclick="openTab(event, 'dessert')">Dessert</button>
+            <button class="tablink" onclick="openTab(event, 'lunch')">Lunch Specials</button>
+            <button class="tablink" onclick="openTab(event, 'build')">Build Your Own</button>
+        </div>
 
-    <!-- Pizza Category -->
-    <h3>🍕 Pizza</h3>
-    <p>Pepperoni | Margherita | BBQ Chicken</p>
+        <!-- Pizza Items -->
+        <div id="pizza" class="tab-content active">
+            <div class="menu-item">
+                <span>Margherita Pizza</span>
+                <button class="button" onclick="addToCart('Margherita Pizza', 10)">Add $10</button>
+            </div>
+            <div class="menu-item">
+                <span>Pepperoni Pizza</span>
+                <button class="button" onclick="addToCart('Pepperoni Pizza', 12)">Add $12</button>
+            </div>
+        </div>
 
-    <!-- Salad Category -->
-    <h3>🥗 Salads</h3>
-    <p>Caesar Salad | Greek Salad</p>
+        <!-- Other tabs similar to pizza tab -->
+        <div id="salad" class="tab-content">
+            <div class="menu-item">
+                <span>Caesar Salad</span>
+                <button class="button" onclick="addToCart('Caesar Salad', 6)">Add $6</button>
+            </div>
+        </div>
 
-    <!-- Sauces Category -->
-    <h3>🧄 Sauces</h3>
-    <p>Garlic Dip | Ranch | Spicy Sauce</p>
+        <div id="sauces" class="tab-content">
+            <div class="menu-item">
+                <span>Garlic Sauce</span>
+                <button class="button" onclick="addToCart('Garlic Sauce', 2)">Add $2</button>
+            </div>
+        </div>
 
-    <!-- Dessert Category -->
-    <h3>🍰 Desserts</h3>
-    <p>Chocolate Lava Cake | Brownies</p>
+        <div id="dessert" class="tab-content">
+            <div class="menu-item">
+                <span>Chocolate Lava Cake</span>
+                <button class="button" onclick="addToCart('Chocolate Lava Cake', 5)">Add $5</button>
+            </div>
+        </div>
 
-    <!-- Lunch Specials -->
-    <h3>🍽 Lunch Specials</h3>
-    <p>Personal Pizza + Drink Combo</p>
+        <div id="lunch" class="tab-content">
+            <div class="menu-item">
+                <span>Pizza + Salad Combo</span>
+                <button class="button" onclick="addToCart('Pizza + Salad Combo', 14)">Add $14</button>
+            </div>
+        </div>
 
-    <!-- Build Your Own -->
-    <h3>🛠 Build Your Own Pizza</h3>
-    <p>Select crust, sauce, toppings and size.</p>
-</section>
+        <!-- Build Your Own -->
+        <div id="build" class="tab-content">
+            <p>Choose your base and toppings:</p>
+            <select id="base">
+                <option value="10">Classic Base $10</option>
+                <option value="12">Cheese Burst $12</option>
+            </select>
+            <select id="toppings" multiple>
+                <option value="2">Pepperoni $2</option>
+                <option value="1">Mushroom $1</option>
+                <option value="1.5">Extra Cheese $1.5</option>
+            </select>
+            <button class="button" onclick="buildPizza()">Add to Cart</button>
+        </div>
+    </section>
 
-<footer>
-    <p>© 2026 Pizza Palace</p>
-</footer>
+    <!-- Cart Section -->
+    <section id="cart">
+        <h2>Cart</h2>
+        <div class="cart-section" id="cart-items">
+            <p>Your cart is empty</p>
+        </div>
+        <button class="button" onclick="checkout()">Checkout</button>
+    </section>
 
+    <footer>
+        <p>&copy; 2026 Pizza Planet. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
