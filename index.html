@@ -1,34 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags - these help with character encoding and responsive design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizza Planet - Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Pizza Hut - Order delicious pizza online for delivery or pickup">
+    
+    <!-- Page title - appears in browser tab -->
+    <title>Pizza Hut | Home</title>
+    
+    <!-- Link to our CSS file -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Google Fonts - Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <h1>Pizza Planet</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="menu.html">Menu</a>
-            <a href="account.html">Account</a>
-            <a href="checkout.html">Checkout</a>
-            <a href="about.html">About Us</a>
-        </nav>
+    <!-- 
+        HEADER SECTION - This appears on every page
+        The header contains the logo, navigation menu, and cart
+    -->
+    <header class="header">
+        <div class="container header-container">
+            <!-- Logo - clicking this takes you to homepage -->
+            <div class="logo">
+                <a href="index.html">
+                    <!-- Using a text logo instead of image for simplicity -->
+                    <span class="logo-text">PIZZA HUT</span>
+                </a>
+            </div>
+            
+            <!-- Mobile menu button - appears only on small screens -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <!-- Navigation menu - main site navigation -->
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="order-online.html">Order Online</a></li>
+                    <li><a href="customer-service.html">Customer Service</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Right side of header - account and cart -->
+            <div class="header-right">
+                <!-- Account dropdown -->
+                <div class="account-dropdown">
+                    <button class="account-btn" id="accountBtn">
+                        <span>Account</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-content" id="accountDropdown">
+                        <a href="login.html">Login</a>
+                        <a href="signup.html">Sign Up</a>
+                        <a href="account.html">My Account</a>
+                        <a href="account.html#orders">Order History</a>
+                    </div>
+                </div>
+                
+                <!-- Shopping cart icon with counter -->
+                <div class="cart-icon" id="cartIcon">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section>
-        <h2>Welcome to Pizza Planet</h2>
-        <p>Delicious pizzas delivered right to your door! Order online now or explore our menu.</p>
-        <button class="button" onclick="window.location.href='menu.html'">View Menu</button>
-    </section>
+    <!-- 
+        MAIN CONTENT - This changes on each page
+        For homepage, we have hero banner, promotions, and featured items
+    -->
+    <main>
+        <!-- Hero Banner Section - Large banner with main promotion -->
+        <section class="hero-banner">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Pizza Hut</h1>
+                    <p class="hero-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+                    <div class="hero-buttons">
+                        <!-- FIXED: These buttons now properly link to menu page -->
+                        <a href="menu.html" class="btn btn-primary">Order Now</a>
+                        <a href="menu.html" class="btn btn-secondary">View Menu</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Pizza Planet. All rights reserved.</p>
+        <!-- Order Mode Selector - Choose delivery or pickup -->
+        <section class="order-mode-section">
+            <div class="container">
+                <div class="order-mode-container">
+                    <h2 class="section-title">How would you like to order?</h2>
+                    <div class="order-mode-buttons">
+                        <!-- Delivery button - active by default -->
+                        <button class="order-mode-btn active" id="deliveryBtn">
+                            <svg width="40" height="40" viewBox="0 0 24 24">
+                                <path d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1z"/>
+                            </svg>
+                            <span>Delivery</span>
+                        </button>
+                        
+                        <!-- Pickup button -->
+                        <button class="order-mode-btn" id="pickupBtn">
+                            <svg width="40" height="40" viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            <span>Pickup</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Delivery address form - shown when delivery is selected -->
+                    <div class="delivery-form" id="deliveryForm">
+                        <h3>Enter delivery address</h3>
+                        <div class="form-group">
+                            <input type="text" placeholder="Enter your address" class="form-input" id="deliveryAddress">
+                            <!-- FIXED: This button now properly links to menu with address -->
+                            <button class="btn btn-primary" id="findStoresBtn">Find Stores</button>
+                        </div>
+                        <p class="form-note">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    
+                    <!-- Pickup store selector - shown when pickup is selected (initially hidden) -->
+                    <div class="pickup-form" id="pickupForm" style="display: none;">
+                        <h3>Find a store near you</h3>
+                        <div class="form-group">
+                            <input type="text" placeholder="Enter your location" class="form-input" id="pickupLocation">
+                            <!-- FIXED: This button now properly searches for stores -->
+                            <button class="btn btn-primary" id="searchStoresBtn">Search</button>
+                        </div>
+                        <div class="store-list" id="storeList">
+                            <!-- Store items will be shown here after search -->
+                            <p class="form-note">Enter a location to see nearby stores</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Categories Section - Quick links to menu categories -->
+        <section class="featured-categories">
+            <div class="container">
+                <h2 class="section-title">Explore Our Menu</h2>
+                <div class="categories-grid">
+                    <!-- Pizza Category - FIXED: Now properly links to menu.html with anchor -->
+                    <a href="menu.html#pizza" class="category-card">
+                        <div class="category-img">
+                            <!-- Using colored div as placeholder instead of image -->
+                            <div style="width:100%; height:100%; background-color: #e31837; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">🍕</div>
+                        </div>
+                        <h3>Pizza</h3>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </a>
+                    
+                    <!-- Salad Category -->
+                    <a href="menu.html#salads" class="category-card">
+                        <div class="category-img">
+                            <div style="width:100%; height:100%; background-color: #4CAF50; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">🥗</div>
+                        </div>
+                        <h3>Salads</h3>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </a>
+                    
+                    <!-- Sauces Category -->
+                    <a href="menu.html#sauces" class="category-card">
+                        <div class="category-img">
+                            <div style="width:100%; height:100%; background-color: #FF9800; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">🥫</div>
+                        </div>
+                        <h3>Sauces</h3>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </a>
+                    
+                    <!-- Desserts Category -->
+                    <a href="menu.html#desserts" class="category-card">
+                        <div class="category-img">
+                            <div style="width:100%; height:100%; background-color: #9C27B0; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">🍰</div>
+                        </div>
+                        <h3>Desserts</h3>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </a>
+                    
+                    <!-- Lunch Specials Category -->
+                    <a href="menu.html#lunch" class="category-card">
+                        <div class="category-img">
+                            <div style="width:100%; height:100%; background-color: #F44336; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">🍱</div>
+                        </div>
+                        <h3>Lunch Specials</h3>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </a>
+                    
+                    <!-- Build Your Own Category -->
+                    <a href="menu.html#build-your-own" class="category-card">
+                        <div class="category-img">
+                            <div style="width:100%; height:100%; background-color: #2196F3; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">🔨</div>
+                        </div>
+                        <h3>Build Your Own</h3>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Offers Section - Promotional items -->
+        <section class="special-offers">
+            <div class="container">
+                <h2 class="section-title">Special Offers</h2>
+                <div class="offers-grid">
+                    <!-- Offer 1 - FIXED: Add to cart buttons now work -->
+                    <div class="offer-card">
+                        <div style="width:100%; height:200px; background-color: #e31837; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px;">🍕</div>
+                        <div class="offer-content">
+                            <h3>Lorem Ipsum Offer</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <p class="offer-price">$12.99</p>
+                            <button class="btn btn-primary add-to-cart" data-product="Lorem Ipsum Offer" data-price="12.99">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Offer 2 -->
+                    <div class="offer-card">
+                        <div style="width:100%; height:200px; background-color: #FF9800; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px;">🍕</div>
+                        <div class="offer-content">
+                            <h3>Dolor Sit Amet</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <p class="offer-price">$15.99</p>
+                            <button class="btn btn-primary add-to-cart" data-product="Dolor Sit Amet" data-price="15.99">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Offer 3 -->
+                    <div class="offer-card">
+                        <div style="width:100%; height:200px; background-color: #4CAF50; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px;">🍕</div>
+                        <div class="offer-content">
+                            <h3>Consectetur Deal</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <p class="offer-price">$18.99</p>
+                            <button class="btn btn-primary add-to-cart" data-product="Consectetur Deal" data-price="18.99">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section - Customer reviews -->
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <div class="testimonials-slider" id="testimonialsSlider">
+                    <div class="testimonial-card active">
+                        <p class="testimonial-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+                        <p class="testimonial-author">- John Doe</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
+                        <p class="testimonial-author">- Jane Smith</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</p>
+                        <p class="testimonial-author">- Bob Johnson</p>
+                    </div>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Order Section - NEW: Quick links to popular items -->
+        <section class="quick-order">
+            <div class="container">
+                <h2 class="section-title">Popular Items</h2>
+                <div class="popular-items">
+                    <button class="popular-item-btn add-to-cart" data-product="Pepperoni Pizza" data-price="12.99">Pepperoni Pizza - $12.99</button>
+                    <button class="popular-item-btn add-to-cart" data-product="Supreme Pizza" data-price="15.99">Supreme Pizza - $15.99</button>
+                    <button class="popular-item-btn add-to-cart" data-product="Caesar Salad" data-price="7.99">Caesar Salad - $7.99</button>
+                    <button class="popular-item-btn add-to-cart" data-product="Chocolate Brownie" data-price="4.99">Chocolate Brownie - $4.99</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 
+        FOOTER SECTION - Appears on every page
+        Contains links, contact info, and legal stuff
+    -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- About column -->
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="about.html#team">Team</a></li>
+                        <li><a href="about.html#careers">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Menu column -->
+                <div class="footer-col">
+                    <h3>Menu</h3>
+                    <ul>
+                        <li><a href="menu.html#pizza">Pizza</a></li>
+                        <li><a href="menu.html#salads">Salads</a></li>
+                        <li><a href="menu.html#sauces">Sauces</a></li>
+                        <li><a href="menu.html#desserts">Desserts</a></li>
+                        <li><a href="menu.html#lunch">Lunch Specials</a></li>
+                        <li><a href="menu.html#build-your-own">Build Your Own</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Customer Service column -->
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="customer-service.html#contact">Contact Us</a></li>
+                        <li><a href="customer-service.html#faq">FAQs</a></li>
+                        <li><a href="customer-service.html#delivery">Delivery Info</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Account column -->
+                <div class="footer-col">
+                    <h3>My Account</h3>
+                    <ul>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="signup.html">Sign Up</a></li>
+                        <li><a href="account.html">My Profile</a></li>
+                        <li><a href="account.html#orders">Order History</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact column -->
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>Email: info@pizzahut.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Address: 123 Pizza St, Cityville</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Social media links -->
+            <div class="social-links">
+                <a href="#" class="social-link">FB</a>
+                <a href="#" class="social-link">IG</a>
+                <a href="#" class="social-link">TW</a>
+            </div>
+            
+            <!-- Copyright and legal -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pizza Hut. All rights reserved. Lorem ipsum dolor sit amet.</p>
+            </div>
+        </div>
     </footer>
+
+    <!-- Shopping Cart Modal - Appears when clicking cart icon -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h3>Your Cart</h3>
+                <button class="close-btn" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be inserted here by JavaScript -->
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount" id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn btn-primary checkout-btn" id="checkoutBtn">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Link to JavaScript file -->
+    <script src="js/script.js"></script>
 </body>
 </html>

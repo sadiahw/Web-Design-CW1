@@ -1,106 +1,470 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Same meta tags as homepage -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizza Planet - Menu</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Pizza Hut Menu - Pizza, Salads, Sauces, Desserts, Lunch Specials, Build Your Own">
+    <title>Pizza Hut | Menu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Pizza Planet</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="menu.html">Menu</a>
-            <a href="account.html">Account</a>
-            <a href="checkout.html">Checkout</a>
-            <a href="about.html">About Us</a>
-        </nav>
+    <!-- Same header as homepage -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo-placeholder.png" alt="Pizza Hut Logo" class="logo-img">
+                </a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html" class="active">Menu</a></li>
+                    <li><a href="order-online.html">Order Online</a></li>
+                    <li><a href="customer-service.html">Customer Service</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-right">
+                <div class="account-dropdown">
+                    <button class="account-btn" id="accountBtn">
+                        <span>Account</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-content" id="accountDropdown">
+                        <a href="login.html">Login</a>
+                        <a href="signup.html">Sign Up</a>
+                        <a href="account.html">My Account</a>
+                        <a href="account.html#orders">Order History</a>
+                    </div>
+                </div>
+                
+                <div class="cart-icon" id="cartIcon">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <section>
-        <h2>Menu</h2>
-
-        <!-- Menu Tabs -->
-        <div class="tabs">
-            <button class="tablink active" onclick="openTab(event, 'pizza')">Pizza</button>
-            <button class="tablink" onclick="openTab(event, 'salad')">Salad</button>
-            <button class="tablink" onclick="openTab(event, 'sauces')">Sauces</button>
-            <button class="tablink" onclick="openTab(event, 'dessert')">Dessert</button>
-            <button class="tablink" onclick="openTab(event, 'lunch')">Lunch Specials</button>
-            <button class="tablink" onclick="openTab(event, 'build')">Build Your Own</button>
-        </div>
-
-        <!-- Pizza Items -->
-        <div id="pizza" class="tab-content active">
-            <div class="menu-item">
-                <span>Margherita Pizza</span>
-                <button class="button" onclick="addToCart('Margherita Pizza', 10)">Add $10</button>
+    <main>
+        <!-- Menu Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Our Menu</h1>
+                <p class="page-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
             </div>
-            <div class="menu-item">
-                <span>Pepperoni Pizza</span>
-                <button class="button" onclick="addToCart('Pepperoni Pizza', 12)">Add $12</button>
+        </section>
+
+        <!-- Menu Categories Navigation -->
+        <div class="menu-categories-nav">
+            <div class="container">
+                <ul class="menu-categories-list">
+                    <li><a href="#pizza" class="menu-category-link active">Pizza</a></li>
+                    <li><a href="#salads" class="menu-category-link">Salads</a></li>
+                    <li><a href="#sauces" class="menu-category-link">Sauces</a></li>
+                    <li><a href="#desserts" class="menu-category-link">Desserts</a></li>
+                    <li><a href="#lunch" class="menu-category-link">Lunch Specials</a></li>
+                    <li><a href="#build-your-own" class="menu-category-link">Build Your Own</a></li>
+                </ul>
             </div>
         </div>
 
-        <!-- Other tabs similar to pizza tab -->
-        <div id="salad" class="tab-content">
-            <div class="menu-item">
-                <span>Caesar Salad</span>
-                <button class="button" onclick="addToCart('Caesar Salad', 6)">Add $6</button>
+        <!-- Menu Sections -->
+        <div class="container">
+            <!-- Pizza Section -->
+            <section id="pizza" class="menu-section">
+                <h2 class="menu-section-title">Pizza</h2>
+                <div class="menu-items-grid">
+                    <!-- Pizza Item 1 -->
+                    <div class="menu-item">
+                        <img src="images/pizza1-placeholder.jpg" alt="Pepperoni Pizza" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">Pepperoni Pizza</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$12.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="Pepperoni Pizza" data-price="12.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pizza Item 2 -->
+                    <div class="menu-item">
+                        <img src="images/pizza2-placeholder.jpg" alt="Margherita Pizza" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">Margherita Pizza</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$11.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="Margherita Pizza" data-price="11.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pizza Item 3 -->
+                    <div class="menu-item">
+                        <img src="images/pizza3-placeholder.jpg" alt="Supreme Pizza" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">Supreme Pizza</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$15.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="Supreme Pizza" data-price="15.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pizza Item 4 -->
+                    <div class="menu-item">
+                        <img src="images/pizza4-placeholder.jpg" alt="BBQ Chicken Pizza" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">BBQ Chicken Pizza</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$14.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="BBQ Chicken Pizza" data-price="14.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Salads Section -->
+            <section id="salads" class="menu-section">
+                <h2 class="menu-section-title">Salads</h2>
+                <div class="menu-items-grid">
+                    <!-- Salad Item 1 -->
+                    <div class="menu-item">
+                        <img src="images/salad1-placeholder.jpg" alt="Garden Salad" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">Garden Salad</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$6.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="Garden Salad" data-price="6.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Salad Item 2 -->
+                    <div class="menu-item">
+                        <img src="images/salad2-placeholder.jpg" alt="Caesar Salad" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">Caesar Salad</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$7.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="Caesar Salad" data-price="7.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sauces Section -->
+            <section id="sauces" class="menu-section">
+                <h2 class="menu-section-title">Sauces</h2>
+                <div class="menu-items-grid">
+                    <!-- Sauce Item 1 -->
+                    <div class="menu-item">
+                        <img src="images/sauce1-placeholder.jpg" alt="Marinara Sauce" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">Marinara Sauce</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$1.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="Marinara Sauce" data-price="1.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sauce Item 2 -->
+                    <div class="menu-item">
+                        <img src="images/sauce2-placeholder.jpg" alt="Garlic Sauce" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">Garlic Sauce</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$1.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="Garlic Sauce" data-price="1.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sauce Item 3 -->
+                    <div class="menu-item">
+                        <img src="images/sauce3-placeholder.jpg" alt="BBQ Sauce" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">BBQ Sauce</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$1.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="BBQ Sauce" data-price="1.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desserts Section -->
+            <section id="desserts" class="menu-section">
+                <h2 class="menu-section-title">Desserts</h2>
+                <div class="menu-items-grid">
+                    <!-- Dessert Item 1 -->
+                    <div class="menu-item">
+                        <img src="images/dessert1-placeholder.jpg" alt="Chocolate Brownie" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">Chocolate Brownie</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$4.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="Chocolate Brownie" data-price="4.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dessert Item 2 -->
+                    <div class="menu-item">
+                        <img src="images/dessert2-placeholder.jpg" alt="Cinnamon Sticks" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">Cinnamon Sticks</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$3.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="Cinnamon Sticks" data-price="3.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lunch Specials Section -->
+            <section id="lunch" class="menu-section">
+                <h2 class="menu-section-title">Lunch Specials</h2>
+                <div class="menu-items-grid">
+                    <!-- Lunch Item 1 -->
+                    <div class="menu-item">
+                        <img src="images/lunch1-placeholder.jpg" alt="Personal Pizza Lunch" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">Personal Pizza Lunch</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Includes drink.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$8.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="Personal Pizza Lunch" data-price="8.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Lunch Item 2 -->
+                    <div class="menu-item">
+                        <img src="images/lunch2-placeholder.jpg" alt="Pasta Lunch" class="menu-item-img">
+                        <div class="menu-item-content">
+                            <h3 class="menu-item-title">Pasta Lunch</h3>
+                            <p class="menu-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Includes drink.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">$7.99</span>
+                                <button class="btn btn-primary add-to-cart" data-product="Pasta Lunch" data-price="7.99">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Build Your Own Section -->
+            <section id="build-your-own" class="menu-section">
+                <h2 class="menu-section-title">Build Your Own Pizza</h2>
+                <div class="build-your-own-container">
+                    <p class="build-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    
+                    <!-- Size Selection -->
+                    <div class="build-step">
+                        <h3>1. Choose Size</h3>
+                        <div class="options-group">
+                            <label class="option-label">
+                                <input type="radio" name="size" value="small" checked> Small (10") - $8.99
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="size" value="medium"> Medium (12") - $10.99
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="size" value="large"> Large (14") - $12.99
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Crust Selection -->
+                    <div class="build-step">
+                        <h3>2. Choose Crust</h3>
+                        <div class="options-group">
+                            <label class="option-label">
+                                <input type="radio" name="crust" value="original" checked> Original
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="crust" value="thin"> Thin
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="crust" value="stuffed"> Stuffed - $2.00
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Sauce Selection -->
+                    <div class="build-step">
+                        <h3>3. Choose Sauce</h3>
+                        <div class="options-group">
+                            <label class="option-label">
+                                <input type="radio" name="sauce" value="marinara" checked> Marinara
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="sauce" value="bbq"> BBQ
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="sauce" value="alfredo"> Alfredo
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Toppings Selection -->
+                    <div class="build-step">
+                        <h3>4. Choose Toppings ($1.00 each)</h3>
+                        <div class="toppings-grid">
+                            <label class="option-label">
+                                <input type="checkbox" name="topping" value="pepperoni"> Pepperoni
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="topping" value="sausage"> Sausage
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="topping" value="mushrooms"> Mushrooms
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="topping" value="onions"> Onions
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="topping" value="peppers"> Green Peppers
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="topping" value="olives"> Olives
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="topping" value="bacon"> Bacon
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="topping" value="chicken"> Chicken
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Total and Add to Cart -->
+                    <div class="build-total">
+                        <span>Total:</span>
+                        <span class="build-price" id="buildPrice">$8.99</span>
+                    </div>
+                    <button class="btn btn-primary" id="addCustomPizza">Add Custom Pizza to Cart</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Same footer as homepage -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="about.html#team">Team</a></li>
+                        <li><a href="about.html#careers">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Menu</h3>
+                    <ul>
+                        <li><a href="menu.html#pizza">Pizza</a></li>
+                        <li><a href="menu.html#salads">Salads</a></li>
+                        <li><a href="menu.html#sauces">Sauces</a></li>
+                        <li><a href="menu.html#desserts">Desserts</a></li>
+                        <li><a href="menu.html#lunch">Lunch Specials</a></li>
+                        <li><a href="menu.html#build-your-own">Build Your Own</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="customer-service.html#contact">Contact Us</a></li>
+                        <li><a href="customer-service.html#faq">FAQs</a></li>
+                        <li><a href="customer-service.html#delivery">Delivery Info</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>My Account</h3>
+                    <ul>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="signup.html">Sign Up</a></li>
+                        <li><a href="account.html">My Profile</a></li>
+                        <li><a href="account.html#orders">Order History</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>Email: info@pizzahut.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Address: 123 Pizza St, Cityville</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="#" class="social-link">FB</a>
+                <a href="#" class="social-link">IG</a>
+                <a href="#" class="social-link">TW</a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pizza Hut. All rights reserved. Lorem ipsum dolor sit amet.</p>
             </div>
         </div>
-
-        <div id="sauces" class="tab-content">
-            <div class="menu-item">
-                <span>Garlic Sauce</span>
-                <button class="button" onclick="addToCart('Garlic Sauce', 2)">Add $2</button>
-            </div>
-        </div>
-
-        <div id="dessert" class="tab-content">
-            <div class="menu-item">
-                <span>Chocolate Lava Cake</span>
-                <button class="button" onclick="addToCart('Chocolate Lava Cake', 5)">Add $5</button>
-            </div>
-        </div>
-
-        <div id="lunch" class="tab-content">
-            <div class="menu-item">
-                <span>Pizza + Salad Combo</span>
-                <button class="button" onclick="addToCart('Pizza + Salad Combo', 14)">Add $14</button>
-            </div>
-        </div>
-
-        <!-- Build Your Own -->
-        <div id="build" class="tab-content">
-            <p>Choose your base and toppings:</p>
-            <select id="base">
-                <option value="10">Classic Base $10</option>
-                <option value="12">Cheese Burst $12</option>
-            </select>
-            <select id="toppings" multiple>
-                <option value="2">Pepperoni $2</option>
-                <option value="1">Mushroom $1</option>
-                <option value="1.5">Extra Cheese $1.5</option>
-            </select>
-            <button class="button" onclick="buildPizza()">Add to Cart</button>
-        </div>
-    </section>
-
-    <!-- Cart Section -->
-    <section id="cart">
-        <h2>Cart</h2>
-        <div class="cart-section" id="cart-items">
-            <p>Your cart is empty</p>
-        </div>
-        <button class="button" onclick="checkout()">Checkout</button>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Pizza Planet. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Same cart modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h3>Your Cart</h3>
+                <button class="close-btn" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount" id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn btn-primary checkout-btn" id="checkoutBtn">Checkout</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
 </body>
 </html>

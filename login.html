@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="About Pizza Hut - Our story, team, and careers">
-    <title>Pizza Hut | About Us</title>
+    <meta name="description" content="Login to Pizza Hut account">
+    <title>Pizza Hut | Login</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -29,7 +29,7 @@
                     <li><a href="menu.html">Menu</a></li>
                     <li><a href="order-online.html">Order Online</a></li>
                     <li><a href="customer-service.html">Customer Service</a></li>
-                    <li><a href="about.html" class="active">About Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
                 </ul>
             </nav>
             
@@ -42,7 +42,7 @@
                         </svg>
                     </button>
                     <div class="dropdown-content" id="accountDropdown">
-                        <a href="login.html">Login</a>
+                        <a href="login.html" class="active">Login</a>
                         <a href="signup.html">Sign Up</a>
                         <a href="account.html">My Account</a>
                         <a href="account.html#orders">Order History</a>
@@ -62,100 +62,42 @@
     <main>
         <section class="page-header">
             <div class="container">
-                <h1 class="page-title">About Us</h1>
-                <p class="page-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Learn more about Pizza Hut.</p>
+                <h1 class="page-title">Login</h1>
+                <p class="page-description">Welcome back! Login to your Pizza Hut account.</p>
             </div>
         </section>
 
-        <!-- Our Story Section -->
-        <section id="story" class="story-section">
+        <section class="auth-section">
             <div class="container">
-                <div class="story-content">
-                    <h2 class="section-title">Our Story</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                </div>
-                <div class="story-image">
-                    <img src="images/about-placeholder.jpg" alt="Pizza Hut Restaurant" style="width:100%; border-radius:8px;">
-                </div>
-            </div>
-        </section>
-
-        <!-- Our Values -->
-        <section class="values-section">
-            <div class="container">
-                <h2 class="section-title">Our Values</h2>
-                <div class="values-grid">
-                    <div class="value-card">
-                        <h3>Quality</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+                <div class="auth-container">
+                    <form class="auth-form" id="loginForm">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password *</label>
+                            <input type="password" id="password" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="remember"> Remember me
+                            </label>
+                            <a href="#" class="forgot-password">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary auth-btn">Login</button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
                     </div>
-                    <div class="value-card">
-                        <h3>Service</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
-                    </div>
-                    <div class="value-card">
-                        <h3>Community</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
-                    </div>
-                    <div class="value-card">
-                        <h3>Innovation</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Team Section -->
-        <section id="team" class="team-section">
-            <div class="container">
-                <h2 class="section-title">Our Team</h2>
-                <div class="team-grid">
-                    <div class="team-member">
-                        <img src="images/team1-placeholder.jpg" alt="Team Member">
-                        <h3>John Smith</h3>
-                        <p>CEO</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="images/team2-placeholder.jpg" alt="Team Member">
-                        <h3>Jane Doe</h3>
-                        <p>Head Chef</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="images/team3-placeholder.jpg" alt="Team Member">
-                        <h3>Mike Johnson</h3>
-                        <p>Operations Manager</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="images/team4-placeholder.jpg" alt="Team Member">
-                        <h3>Sarah Williams</h3>
-                        <p>Customer Service</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Careers Section -->
-        <section id="careers" class="careers-section">
-            <div class="container">
-                <h2 class="section-title">Careers</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Join our team!</p>
-                <div class="jobs-list">
-                    <div class="job-card">
-                        <h3>Delivery Driver</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <button class="btn btn-primary">Apply Now</button>
-                    </div>
-                    <div class="job-card">
-                        <h3>Cook</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <button class="btn btn-primary">Apply Now</button>
-                    </div>
-                    <div class="job-card">
-                        <h3>Store Manager</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <button class="btn btn-primary">Apply Now</button>
+                    
+                    <div class="auth-success" id="loginSuccess" style="display: none;">
+                        <h3>Login successful!</h3>
+                        <p>Redirecting you to your account...</p>
                     </div>
                 </div>
             </div>

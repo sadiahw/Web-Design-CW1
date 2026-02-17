@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Order Pizza Online - Find Pizza Hut locations near you">
+    <title>Pizza Hut | Order Online</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo-placeholder.png" alt="Pizza Hut Logo" class="logo-img">
+                </a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="order-online.html" class="active">Order Online</a></li>
+                    <li><a href="customer-service.html">Customer Service</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-right">
+                <div class="account-dropdown">
+                    <button class="account-btn" id="accountBtn">
+                        <span>Account</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-content" id="accountDropdown">
+                        <a href="login.html">Login</a>
+                        <a href="signup.html">Sign Up</a>
+                        <a href="account.html">My Account</a>
+                        <a href="account.html#orders">Order History</a>
+                    </div>
+                </div>
+                
+                <div class="cart-icon" id="cartIcon">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Order Online</h1>
+                <p class="page-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Find a Pizza Hut near you for delivery or pickup.</p>
+            </div>
+        </section>
+
+        <!-- Order Mode Toggle -->
+        <section class="order-mode-section">
+            <div class="container">
+                <div class="order-mode-buttons">
+                    <button class="order-mode-btn active" id="deliveryPageBtn">
+                        <svg width="40" height="40" viewBox="0 0 24 24">
+                            <path d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1z"/>
+                        </svg>
+                        <span>Delivery</span>
+                    </button>
+                    
+                    <button class="order-mode-btn" id="pickupPageBtn">
+                        <svg width="40" height="40" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        <span>Pickup</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Search -->
+        <section class="location-search">
+            <div class="container">
+                <div class="search-container">
+                    <h2>Find a location near you</h2>
+                    <div class="search-box">
+                        <input type="text" placeholder="Enter your address or zip code" class="search-input" id="locationSearch">
+                        <button class="btn btn-primary" id="searchBtn">Search</button>
+                    </div>
+                    <button class="btn btn-secondary" id="useMyLocation">Use my current location</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Placeholder -->
+        <section class="map-section">
+            <div class="container">
+                <div class="map-placeholder">
+                    <!-- This would be replaced with an actual map in a real application -->
+                    <div class="map-image">
+                        <img src="images/map-placeholder.jpg" alt="Map showing Pizza Hut locations" style="width:100%; border-radius:8px;">
+                        <div class="map-overlay">
+                            <p>Map would display here with store locations</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Store List -->
+        <section class="store-list-section">
+            <div class="container">
+                <h2 class="section-title">Locations Near You</h2>
+                <div class="stores-grid">
+                    <!-- Store 1 -->
+                    <div class="store-card">
+                        <h3>Pizza Hut Downtown</h3>
+                        <p class="store-address">123 Main Street, Cityville, ST 12345</p>
+                        <p class="store-distance">0.8 miles away</p>
+                        <p class="store-hours">Open until 11:00 PM</p>
+                        <div class="store-actions">
+                            <button class="btn btn-primary order-delivery-btn" data-store="Downtown">Order Delivery</button>
+                            <button class="btn btn-secondary order-pickup-btn" data-store="Downtown">Pickup</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Store 2 -->
+                    <div class="store-card">
+                        <h3>Pizza Hut Mall</h3>
+                        <p class="store-address">456 Shopping Avenue, Cityville, ST 12345</p>
+                        <p class="store-distance">1.2 miles away</p>
+                        <p class="store-hours">Open until 10:00 PM</p>
+                        <div class="store-actions">
+                            <button class="btn btn-primary order-delivery-btn" data-store="Mall">Order Delivery</button>
+                            <button class="btn btn-secondary order-pickup-btn" data-store="Mall">Pickup</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Store 3 -->
+                    <div class="store-card">
+                        <h3>Pizza Hut University</h3>
+                        <p class="store-address">789 College Blvd, Cityville, ST 12345</p>
+                        <p class="store-distance">2.3 miles away</p>
+                        <p class="store-hours">Open until 2:00 AM</p>
+                        <div class="store-actions">
+                            <button class="btn btn-primary order-delivery-btn" data-store="University">Order Delivery</button>
+                            <button class="btn btn-secondary order-pickup-btn" data-store="University">Pickup</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Store 4 -->
+                    <div class="store-card">
+                        <h3>Pizza Hut Suburb</h3>
+                        <p class="store-address">321 Oak Road, Suburbia, ST 12345</p>
+                        <p class="store-distance">3.5 miles away</p>
+                        <p class="store-hours">Open until 11:00 PM</p>
+                        <div class="store-actions">
+                            <button class="btn btn-primary order-delivery-btn" data-store="Suburb">Order Delivery</button>
+                            <button class="btn btn-secondary order-pickup-btn" data-store="Suburb">Pickup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Delivery Information -->
+        <section class="delivery-info">
+            <div class="container">
+                <h2 class="section-title">Delivery Information</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Delivery Areas</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Delivery Charges</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Delivery fees vary by location and order amount.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Delivery Times</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Average delivery time is 30-45 minutes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="about.html#team">Team</a></li>
+                        <li><a href="about.html#careers">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Menu</h3>
+                    <ul>
+                        <li><a href="menu.html#pizza">Pizza</a></li>
+                        <li><a href="menu.html#salads">Salads</a></li>
+                        <li><a href="menu.html#sauces">Sauces</a></li>
+                        <li><a href="menu.html#desserts">Desserts</a></li>
+                        <li><a href="menu.html#lunch">Lunch Specials</a></li>
+                        <li><a href="menu.html#build-your-own">Build Your Own</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="customer-service.html#contact">Contact Us</a></li>
+                        <li><a href="customer-service.html#faq">FAQs</a></li>
+                        <li><a href="customer-service.html#delivery">Delivery Info</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>My Account</h3>
+                    <ul>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="signup.html">Sign Up</a></li>
+                        <li><a href="account.html">My Profile</a></li>
+                        <li><a href="account.html#orders">Order History</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>Email: info@pizzahut.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Address: 123 Pizza St, Cityville</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="#" class="social-link">FB</a>
+                <a href="#" class="social-link">IG</a>
+                <a href="#" class="social-link">TW</a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pizza Hut. All rights reserved. Lorem ipsum dolor sit amet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h3>Your Cart</h3>
+                <button class="close-btn" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount" id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn btn-primary checkout-btn" id="checkoutBtn">Checkout</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

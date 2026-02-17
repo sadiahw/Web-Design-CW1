@@ -3,51 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizza Planet - Account</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Pizza Hut Account - Profile, order history, saved addresses, payment methods, favorite orders">
+    <title>Pizza Hut | My Account</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-<header>
-    <h1>Pizza Planet</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="account.html">Account</a>
-        <a href="checkout.html">Checkout</a>
-        <a href="about.html">About Us</a>
-    </nav>
-</header>
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo-placeholder.png" alt="Pizza Hut Logo" class="logo-img">
+                </a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="order-online.html">Order Online</a></li>
+                    <li><a href="customer-service.html">Customer Service</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-right">
+                <div class="account-dropdown">
+                    <button class="account-btn" id="accountBtn">
+                        <span>Account</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-content" id="accountDropdown">
+                        <a href="login.html">Login</a>
+                        <a href="signup.html">Sign Up</a>
+                        <a href="account.html" class="active">My Account</a>
+                        <a href="account.html#orders">Order History</a>
+                    </div>
+                </div>
+                
+                <div class="cart-icon" id="cartIcon">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<section>
-    <h2>User Account</h2>
-    <div class="account-section">
-        <h3>Profile</h3>
-        <input type="text" placeholder="Name">
-        <input type="email" placeholder="Email">
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">My Account</h1>
+                <p class="page-description">Welcome back, John! Manage your account information and preferences.</p>
+            </div>
+        </section>
 
-        <h3>Order History</h3>
-        <ul>
-            <li>Margherita Pizza - $10</li>
-        </ul>
+        <!-- Account Tabs -->
+        <div class="account-tabs">
+            <div class="container">
+                <ul class="tab-list">
+                    <li><button class="tab-btn active" data-tab="profile">Profile</button></li>
+                    <li><button class="tab-btn" data-tab="orders">Order History</button></li>
+                    <li><button class="tab-btn" data-tab="addresses">Saved Addresses</button></li>
+                    <li><button class="tab-btn" data-tab="payments">Payment Methods</button></li>
+                    <li><button class="tab-btn" data-tab="favorites">Favorite Orders</button></li>
+                </ul>
+            </div>
+        </div>
 
-        <h3>Saved Addresses</h3>
-        <input type="text" placeholder="Home Address">
+        <div class="container">
+            <!-- Profile Tab Content -->
+            <div class="tab-content active" id="profileTab">
+                <div class="profile-section">
+                    <h2>Profile Information</h2>
+                    <form class="profile-form">
+                        <div class="form-group">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" id="firstName" class="form-input" value="John">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" id="lastName" class="form-input" value="Doe">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profileEmail">Email:</label>
+                            <input type="email" id="profileEmail" class="form-input" value="john.doe@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profilePhone">Phone:</label>
+                            <input type="tel" id="profilePhone" class="form-input" value="(555) 123-4567">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="birthday">Birthday:</label>
+                            <input type="date" id="birthday" class="form-input" value="1990-01-01">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="preferences">Preferences:</label>
+                            <select id="preferences" class="form-input">
+                                <option value="none">No preferences</option>
+                                <option value="vegetarian">Vegetarian</option>
+                                <option value="gluten-free">Gluten Free</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
 
-        <h3>Payment Methods</h3>
-        <input type="text" placeholder="Card Number">
+            <!-- Orders Tab Content -->
+            <div class="tab-content" id="ordersTab">
+                <div class="orders-section">
+                    <h2>Order History</h2>
+                    <div class="orders-list">
+                        <!-- Order 1 -->
+                        <div class="order-card">
+                            <div class="order-header">
+                                <span class="order-number">Order #12345</span>
+                                <span class="order-date">March 15, 2025</span>
+                                <span class="order-status delivered">Delivered</span>
+                            </div>
+                            <div class="order-items">
+                                <p>Pepperoni Pizza x2</p>
+                                <p>Garlic Bread x1</p>
+                            </div>
+                            <div class="order-footer">
+                                <span class="order-total">Total: $28.97</span>
+                                <button class="btn btn-secondary reorder-btn" data-order="12345">Reorder</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Order 2 -->
+                        <div class="order-card">
+                            <div class="order-header">
+                                <span class="order-number">Order #12344</span>
+                                <span class="order-date">March 10, 2025</span>
+                                <span class="order-status delivered">Delivered</span>
+                            </div>
+                            <div class="order-items">
+                                <p>Supreme Pizza x1</p>
+                                <p>Caesar Salad x1</p>
+                                <p>Chocolate Brownie x2</p>
+                            </div>
+                            <div class="order-footer">
+                                <span class="order-total">Total: $32.96</span>
+                                <button class="btn btn-secondary reorder-btn" data-order="12344">Reorder</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Order 3 -->
+                        <div class="order-card">
+                            <div class="order-header">
+                                <span class="order-number">Order #12343</span>
+                                <span class="order-date">March 5, 2025</span>
+                                <span class="order-status delivered">Delivered</span>
+                            </div>
+                            <div class="order-items">
+                                <p>BBQ Chicken Pizza x1</p>
+                                <p>Cinnamon Sticks x1</p>
+                            </div>
+                            <div class="order-footer">
+                                <span class="order-total">Total: $18.98</span>
+                                <button class="btn btn-secondary reorder-btn" data-order="12343">Reorder</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <h3>Favorite Orders</h3>
-        <p>Pepperoni Pizza</p>
+            <!-- Addresses Tab Content -->
+            <div class="tab-content" id="addressesTab">
+                <div class="addresses-section">
+                    <h2>Saved Addresses</h2>
+                    <div class="addresses-grid">
+                        <!-- Address 1 -->
+                        <div class="address-card">
+                            <h3>Home</h3>
+                            <p>123 Main Street</p>
+                            <p>Apt 4B</p>
+                            <p>Cityville, ST 12345</p>
+                            <p>United States</p>
+                            <div class="address-actions">
+                                <button class="btn btn-secondary edit-address" data-address="home">Edit</button>
+                                <button class="btn btn-secondary delete-address" data-address="home">Delete</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Address 2 -->
+                        <div class="address-card">
+                            <h3>Work</h3>
+                            <p>456 Business Ave</p>
+                            <p>Suite 100</p>
+                            <p>Cityville, ST 12345</p>
+                            <p>United States</p>
+                            <div class="address-actions">
+                                <button class="btn btn-secondary edit-address" data-address="work">Edit</button>
+                                <button class="btn btn-secondary delete-address" data-address="work">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary add-address-btn">Add New Address</button>
+                </div>
+            </div>
 
-        <h3>Sign Up / Log In</h3>
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <button class="button">Sign Up / Log In</button>
+            <!-- Payment Methods Tab Content -->
+            <div class="tab-content" id="paymentsTab">
+                <div class="payments-section">
+                    <h2>Payment Methods</h2>
+                    <div class="payments-grid">
+                        <!-- Card 1 -->
+                        <div class="payment-card">
+                            <h3>Visa ending in 1234</h3>
+                            <p>John Doe</p>
+                            <p>Expires: 12/26</p>
+                            <div class="payment-actions">
+                                <button class="btn btn-secondary edit-payment" data-payment="1">Edit</button>
+                                <button class="btn btn-secondary delete-payment" data-payment="1">Delete</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 2 -->
+                        <div class="payment-card">
+                            <h3>Mastercard ending in 5678</h3>
+                            <p>John Doe</p>
+                            <p>Expires: 08/25</p>
+                            <div class="payment-actions">
+                                <button class="btn btn-secondary edit-payment" data-payment="2">Edit</button>
+                                <button class="btn btn-secondary delete-payment" data-payment="2">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary add-payment-btn">Add Payment Method</button>
+                </div>
+            </div>
+
+            <!-- Favorites Tab Content -->
+            <div class="tab-content" id="favoritesTab">
+                <div class="favorites-section">
+                    <h2>Favorite Orders</h2>
+                    <div class="favorites-grid">
+                        <!-- Favorite 1 -->
+                        <div class="favorite-card">
+                            <h3>My Favorite Pizza</h3>
+                            <p>Large Pepperoni Pizza</p>
+                            <p>Extra Cheese</p>
+                            <p class="favorite-price">$15.99</p>
+                            <button class="btn btn-primary add-to-cart" data-product="Favorite Pizza" data-price="15.99">Add to Cart</button>
+                        </div>
+                        
+                        <!-- Favorite 2 -->
+                        <div class="favorite-card">
+                            <h3>Lunch Combo</h3>
+                            <p>Personal Pizza</p>
+                            <p>Caesar Salad</p>
+                            <p>Drink</p>
+                            <p class="favorite-price">$12.99</p>
+                            <button class="btn btn-primary add-to-cart" data-product="Lunch Combo" data-price="12.99">Add to Cart</button>
+                        </div>
+                        
+                        <!-- Favorite 3 -->
+                        <div class="favorite-card">
+                            <h3>Family Deal</h3>
+                            <p>Large Supreme Pizza</p>
+                            <p>Garlic Bread</p>
+                            <p>Chocolate Brownie x2</p>
+                            <p class="favorite-price">$24.99</p>
+                            <button class="btn btn-primary add-to-cart" data-product="Family Deal" data-price="24.99">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="about.html#team">Team</a></li>
+                        <li><a href="about.html#careers">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Menu</h3>
+                    <ul>
+                        <li><a href="menu.html#pizza">Pizza</a></li>
+                        <li><a href="menu.html#salads">Salads</a></li>
+                        <li><a href="menu.html#sauces">Sauces</a></li>
+                        <li><a href="menu.html#desserts">Desserts</a></li>
+                        <li><a href="menu.html#lunch">Lunch Specials</a></li>
+                        <li><a href="menu.html#build-your-own">Build Your Own</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="customer-service.html#contact">Contact Us</a></li>
+                        <li><a href="customer-service.html#faq">FAQs</a></li>
+                        <li><a href="customer-service.html#delivery">Delivery Info</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>My Account</h3>
+                    <ul>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="signup.html">Sign Up</a></li>
+                        <li><a href="account.html">My Profile</a></li>
+                        <li><a href="account.html#orders">Order History</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>Email: info@pizzahut.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Address: 123 Pizza St, Cityville</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="#" class="social-link">FB</a>
+                <a href="#" class="social-link">IG</a>
+                <a href="#" class="social-link">TW</a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pizza Hut. All rights reserved. Lorem ipsum dolor sit amet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h3>Your Cart</h3>
+                <button class="close-btn" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount" id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn btn-primary checkout-btn" id="checkoutBtn">Checkout</button>
+        </div>
     </div>
-</section>
 
-<footer>
-    <p>&copy; 2026 Pizza Planet. All rights reserved.</p>
-</footer>
+    <script src="js/script.js"></script>
 </body>
 </html>
