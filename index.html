@@ -1,63 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Meta tags - these help with character encoding and responsive design -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pizza Hut - Order delicious pizza online for delivery or pickup">
+<html>
+<head> <!-- Contains metadata and links to external resources, not displayed on the page -->
+    <!-- Meta tags for character encoding and RWD -->
+    <meta charset="UTF-8"> <!-- Specifies character encoding as UTF-8 -->
+    <!-- Implementing RWD -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     
-    <!-- Page title - appears in browser tab -->
-    <title>Pizza Hut | Home</title>
+    <!-- Page title -->
+    <title>Pizza Jerk | Home</title>
     
-    <!-- Link to our CSS file -->
+    <!-- Link to CSS file -->
     <link rel="stylesheet" href="css/style.css">
     
-    <!-- Google Fonts - Nunito -->
+    <!-- Link to google fonts - Nunito sheet,  note: replace-->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 
-        HEADER SECTION - This appears on every page
+    <!-- HEADER SECTION: This should appear on every page
         The header contains the logo, navigation menu, and cart
     -->
     <header class="header">
-        <div class="container header-container">
-            <!-- Logo - clicking this takes you to homepage -->
+        <div class="container header-container"> <!-- Container to center content and add spacing -->
+            <!-- Logo: clicking this should take user to homepage -->
+
+            <!-- Logo container -->
             <div class="logo">
-                <a href="index.html">
-                    <!-- Using a text logo instead of image for simplicity -->
-                    <span class="logo-text">PIZZA HUT</span>
+                <a href="index.html"> <!-- Link that takes user to homepage when clicked -->
+                    <!-- Temporarily used text logo, maybe replace with photo? -->
+                    <span class="logo-text">PIZZA JERK</span>
                 </a>
             </div>
             
-            <!-- Mobile menu button - appears only on small screens -->
+            <!-- Mobile Menu Button (hamburger icon), visible only on mobile devices -->
             <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <!-- Three empty spans to create the hamburger icon lines -->
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             
-            <!-- Navigation menu - main site navigation -->
-            <nav class="nav-menu" id="navMenu">
+            <!-- Navigation Menu: Main site navigation links -->
+             <!-- Navigation container with ID for js mobile hamburg menu toggle -->
+            <nav class="nav-menu" id="navMenu"> 
+                <!-- Unordered list with nav links-->
                 <ul class="nav-list">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="order-online.html">Order Online</a></li>
-                    <li><a href="customer-service.html">Customer Service</a></li>
-                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="index.html" class="active">Home</a></li> <!-- Link to home page (index page) -->
+                    <li><a href="menu.html">Menu</a></li> <!-- Link to menu page -->
+                    <li><a href="order-online.html">Order Online</a></li> <!-- Link to Order Online page -->
+                    <li><a href="customer-service.html">Customer Service</a></li> <!-- Link to Customer Service page -->
+                    <li><a href="about.html">About Us</a></li> <!-- Link to About Us page -->
                 </ul>
             </nav>
             
             <!-- Right side of header - account and cart -->
             <div class="header-right">
-                <!-- Account dropdown -->
+                
+                <!-- Account dropdown container -->
                 <div class="account-dropdown">
                     <button class="account-btn" id="accountBtn">
-                        <span>Account</span>
-                        <svg width="12" height="12" viewBox="0 0 24 24">
-                            <path d="M7 10l5 5 5-5z"/>
+                        <span>Account</span> <!-- Displays the text "Account" on the button -->
+
+                        <!-- Using a scalable vector graph (svg) to draw an arrow-->
+                        <svg width="12" height="12" viewBox="0 0 24 24"> <!-- width and height control size of arrow icon, viewBox defines the drawing area (icon was designed on a 24×24 grid starting at position 0,0). Took from google fonts: drop down arrow https://fonts.google.com/icons?selected=Material+Symbols+Outlined:arrow_drop_down:FILL@0;wght@400;GRAD@0;opsz@24&icon.query=arrow&icon.size=24&icon.color=%23e3e3e3---->
+                            <path d="M7 10l5 5 5-5z"/> <!-- This draws the arrow shape and creates a downward arrow -->
                         </svg>
                     </button>
+                    
+                    <!-- Dropdown menu container so its hidden until user clicks button -->
                     <div class="dropdown-content" id="accountDropdown">
                         <a href="login.html">Login</a>
                         <a href="signup.html">Sign Up</a>
@@ -68,8 +77,13 @@
                 
                 <!-- Shopping cart icon with counter -->
                 <div class="cart-icon" id="cartIcon">
-                    <svg width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1z"/>
+                    <!--Taken from google fonts: Shopping Cart -->
+                     <svg xmlns="http://www.w3.org/2000/svg" 
+                        height="20px" 
+                        width="20px" 
+                        viewBox="0 -960 960 960" 
+                        fill="#e3e3e3">
+                        <path d="M213-117.21q-21-21.21-21-51T213.21-219q21.21-21 51-21T315-218.79q21 21.21 21 51T314.79-117q-21.21 21-51 21T213-117.21Zm432 0q-21-21.21-21-51T645.21-219q21.21-21 51-21T747-218.79q21 21.21 21 51T746.79-117q-21.21 21-51 21T645-117.21ZM253-696l83 192h301l82-192H253Zm-31-72h570q14 0 20.5 11t1.5 23L702.63-476.14Q694-456 676.5-444T637-432H317l-42 72h493v72H276q-43 0-63.5-36.15-20.5-36.16.5-71.85l52-90-131-306H48v-72h133l41 96Zm114 264h301-301Z"/>
                     </svg>
                     <span class="cart-count" id="cartCount">0</span>
                 </div>
@@ -77,16 +91,14 @@
         </div>
     </header>
 
-    <!-- 
-        MAIN CONTENT - This changes on each page
-        For homepage, we have hero banner, promotions, and featured items
-    -->
+    <!-- MAIN CONTENT -->
+     <!--Hero banner, order mode, food menu, special promotions/offers, cutomer testemonials, popular items (This changes on each page)-->
     <main>
-        <!-- Hero Banner Section - Large banner with main promotion -->
-        <section class="hero-banner">
+        <!-- Hero Banner Section at the top of the page-->
+        <section class="hero-banner"> 
             <div class="container">
                 <div class="hero-content">
-                    <h1 class="hero-title">Pizza Hut</h1>
+                    <h1 class="hero-title">Pizza Jerk</h1>
                     <p class="hero-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
                     <div class="hero-buttons">
                         <!-- FIXED: These buttons now properly link to menu page -->
@@ -97,8 +109,8 @@
             </div>
         </section>
 
-        <!-- Order Mode Selector - Choose delivery or pickup -->
-        <section class="order-mode-section">
+        <!-- Order Mode: delivery or pickup -->
+        <section class="order-mode">
             <div class="container">
                 <div class="order-mode-container">
                     <h2 class="section-title">How would you like to order?</h2>
@@ -347,7 +359,7 @@
                 <div class="footer-col">
                     <h3>Contact</h3>
                     <ul>
-                        <li>Email: info@pizzahut.com</li>
+                        <li>Email: info@pizzajerk.com</li>
                         <li>Phone: (555) 123-4567</li>
                         <li>Address: 123 Pizza St, Cityville</li>
                     </ul>
@@ -363,12 +375,12 @@
             
             <!-- Copyright and legal -->
             <div class="footer-bottom">
-                <p>&copy; 2025 Pizza Hut. All rights reserved. Lorem ipsum dolor sit amet.</p>
+                <p>&copy; 2025 Pizza Jerk. All rights reserved. Lorem ipsum dolor sit amet.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Shopping Cart Modal - Appears when clicking cart icon -->
+    <!-- Shopping Cart Modal, Appears when clicking cart icon -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-modal-content">
             <div class="cart-modal-header">

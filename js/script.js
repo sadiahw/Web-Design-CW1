@@ -1,5 +1,5 @@
 /* ========================================
-   PIZZA HUT WEBSITE - MAIN JAVASCRIPT
+   PIZZA Jerk WEBSITE - MAIN JAVASCRIPT
    ======================================== */
 
 // ===== GLOBAL VARIABLES =====
@@ -251,11 +251,11 @@ function openCartModal() {
 }
 
 function saveCart() {
-    localStorage.setItem('pizzaHutCart', JSON.stringify(cart));
+    localStorage.setItem('pizzaJerkCart', JSON.stringify(cart));
 }
 
 function loadCart() {
-    const savedCart = localStorage.getItem('pizzaHutCart');
+    const savedCart = localStorage.getItem('pizzaJerkCart');
     if (savedCart) {
         cart = JSON.parse(savedCart);
     }
@@ -554,17 +554,17 @@ function initHomepageFeatures() {
             if (storeList) {
                 storeList.innerHTML = `
                     <div class="store-item">
-                        <h4>Pizza Hut Downtown</h4>
+                        <h4>Pizza Jerk Downtown</h4>
                         <p>123 Main St - 0.8 miles away</p>
                         <button class="btn btn-secondary select-store-btn" data-store="Downtown">Select Store</button>
                     </div>
                     <div class="store-item">
-                        <h4>Pizza Hut Mall</h4>
+                        <h4>Pizza Jerk Mall</h4>
                         <p>456 Shopping Ave - 1.2 miles away</p>
                         <button class="btn btn-secondary select-store-btn" data-store="Mall">Select Store</button>
                     </div>
                     <div class="store-item">
-                        <h4>Pizza Hut University</h4>
+                        <h4>Pizza Jerk University</h4>
                         <p>789 College Blvd - 2.3 miles away</p>
                         <button class="btn btn-secondary select-store-btn" data-store="University">Select Store</button>
                     </div>
@@ -870,10 +870,10 @@ function processOrder() {
 }
 
 function saveOrderToHistory(order) {
-    let orderHistory = JSON.parse(localStorage.getItem('pizzaHutOrders')) || [];
+    let orderHistory = JSON.parse(localStorage.getItem('pizzaJerkOrders')) || [];
     orderHistory.unshift(order);
     if (orderHistory.length > 10) orderHistory = orderHistory.slice(0, 10);
-    localStorage.setItem('pizzaHutOrders', JSON.stringify(orderHistory));
+    localStorage.setItem('pizzaJerkOrders', JSON.stringify(orderHistory));
 }
 
 // Close modal when clicking outside

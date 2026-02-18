@@ -1,5 +1,5 @@
 /* ========================================
-   PIZZA HUT WEBSITE - MAIN STYLESHEET
+   PIZZA JERK WEBSITE - MAIN STYLESHEET
    
    This file contains all the styles for the website
    Organized from general to specific
@@ -25,7 +25,7 @@ body {
 
 /* Links */
 a {
-    color: #e31837; /* Pizza Hut red */
+    color: #e31837; /* Pizza Jerk red */
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -338,7 +338,7 @@ p {
 
 /* ===== ORDER MODE SECTION ===== */
 
-.order-mode-section {
+.order-mode {
     padding: 60px 0;
     background-color: #f9f9f9;
 }
