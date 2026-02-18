@@ -1,7 +1,6 @@
-// PIZZA JERK WEBSITE - MY FIRST JAVASCRIPT CODE
-// I'm still learning so please be nice!
+// PIZZA JERK WEBSITE
 
-// This is my shopping cart - it starts empty
+// This is shopping cart it starts empty
 let myCart = [];
 
 // This runs when the page loads
