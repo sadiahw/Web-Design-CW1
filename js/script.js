@@ -1,58 +1,61 @@
-/* ========================================
-   PIZZA Jerk WEBSITE - MAIN JAVASCRIPT
-   ======================================== */
+// PIZZA JERK WEBSITE - MY FIRST JAVASCRIPT CODE
+// I'm still learning so please be nice!
 
-// ===== GLOBAL VARIABLES =====
-let cart = [];
+// This is my shopping cart - it starts empty
+let myCart = [];
 
-// ===== WAIT FOR DOM TO LOAD =====
+// This runs when the page loads
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("Page loaded! 🍕");
     
-    // Initialize all components
-    initMobileMenu();
-    initOrderMode();
-    initCart();
-    initFAQ();
-    initTestimonials();
-    initForms();
-    initTabs();
-    initBuildYourOwn();
-    initHomepageFeatures();
-    initCheckoutPage();
+    // Set up all the things on the page
+    setupMobileMenu();
+    setupOrderButtons();
+    setupCart();
+    setupQuestions();
+    setupReviews();
+    setupForms();
+    setupTabs();
+    setupPizzaBuilder();
+    setupHomepage();
+    setupCheckout();
     
-    // Update cart count on every page
-    updateCartCount();
+    // Update how many items in cart
+    showCartCount();
     
-    // Add to cart buttons - single event listener for all pages
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-        // Remove any existing listeners to prevent duplicates
-        btn.removeEventListener('click', handleAddToCart);
-        btn.addEventListener('click', handleAddToCart);
-    });
+    // Make all "add to cart" buttons work
+    let allAddButtons = document.querySelectorAll('.add-to-cart');
+    for (let i = 0; i < allAddButtons.length; i++) {
+        allAddButtons[i].onclick = function(event) {
+            event.preventDefault();
+            let productName = this.getAttribute('data-product');
+            let productPrice = this.getAttribute('data-price');
+            productPrice = Number(productPrice);
+            
+            if (productName && productPrice) {
+                addToCart(productName, productPrice);
+            }
+        };
+    }
 });
 
-// ===== HELPER FUNCTION FOR ADD TO CART =====
-function handleAddToCart(e) {
-    e.preventDefault();
-    const product = this.getAttribute('data-product');
-    const price = parseFloat(this.getAttribute('data-price'));
+// ==================== MOBILE MENU ====================
+function setupMobileMenu() {
+    let menuButton = document.getElementById('mobileMenuBtn');
+    let navMenu = document.getElementById('navMenu');
     
-    if (product && price) {
-        addItemToCart(product, price);
-    }
-}
-
-// ===== MOBILE MENU =====
-function initMobileMenu() {
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navMenu = document.getElementById('navMenu');
-    
-    if (mobileMenuBtn && navMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.classList.toggle('show');
+    if (menuButton && navMenu) {
+        menuButton.onclick = function() {
+            // Toggle menu
+            if (navMenu.style.display === 'block') {
+                navMenu.style.display = 'none';
+            } else {
+                navMenu.style.display = 'block';
+            }
             
-            const spans = this.querySelectorAll('span');
-            if (navMenu.classList.contains('show')) {
+            // Change the hamburger icon
+            let spans = this.getElementsByTagName('span');
+            if (navMenu.style.display === 'block') {
                 spans[0].style.transform = 'rotate(45deg) translate(8px, 8px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(8px, -8px)';
@@ -61,488 +64,577 @@ function initMobileMenu() {
                 spans[1].style.opacity = '1';
                 spans[2].style.transform = 'none';
             }
-        });
+        };
     }
 }
 
-// ===== ORDER MODE SWITCHING =====
-function initOrderMode() {
-    const deliveryBtn = document.getElementById('deliveryBtn');
-    const pickupBtn = document.getElementById('pickupBtn');
-    const deliveryForm = document.getElementById('deliveryForm');
-    const pickupForm = document.getElementById('pickupForm');
-    const deliveryPageBtn = document.getElementById('deliveryPageBtn');
-    const pickupPageBtn = document.getElementById('pickupPageBtn');
+// ==================== DELIVERY OR PICKUP ====================
+function setupOrderButtons() {
+    // Buttons on order page
+    let deliveryBtn = document.getElementById('deliveryBtn');
+    let pickupBtn = document.getElementById('pickupBtn');
+    let deliveryForm = document.getElementById('deliveryForm');
+    let pickupForm = document.getElementById('pickupForm');
     
-    function setOrderMode(mode) {
-        if (deliveryBtn && pickupBtn) {
-            if (mode === 'delivery') {
-                deliveryBtn.classList.add('active');
-                pickupBtn.classList.remove('active');
-                if (deliveryForm) deliveryForm.style.display = 'block';
-                if (pickupForm) pickupForm.style.display = 'none';
-            } else {
-                pickupBtn.classList.add('active');
-                deliveryBtn.classList.remove('active');
-                if (deliveryForm) deliveryForm.style.display = 'none';
-                if (pickupForm) pickupForm.style.display = 'block';
-            }
-        }
+    if (deliveryBtn && deliveryForm && pickupForm) {
+        deliveryBtn.onclick = function() {
+            deliveryBtn.classList.add('active');
+            pickupBtn.classList.remove('active');
+            deliveryForm.style.display = 'block';
+            pickupForm.style.display = 'none';
+        };
         
-        if (deliveryPageBtn && pickupPageBtn) {
-            if (mode === 'delivery') {
-                deliveryPageBtn.classList.add('active');
-                pickupPageBtn.classList.remove('active');
-            } else {
-                pickupPageBtn.classList.add('active');
-                deliveryPageBtn.classList.remove('active');
-            }
-        }
+        pickupBtn.onclick = function() {
+            pickupBtn.classList.add('active');
+            deliveryBtn.classList.remove('active');
+            deliveryForm.style.display = 'none';
+            pickupForm.style.display = 'block';
+        };
     }
     
-    if (deliveryBtn) deliveryBtn.addEventListener('click', () => setOrderMode('delivery'));
-    if (pickupBtn) pickupBtn.addEventListener('click', () => setOrderMode('pickup'));
-    if (deliveryPageBtn) deliveryPageBtn.addEventListener('click', () => setOrderMode('delivery'));
-    if (pickupPageBtn) pickupPageBtn.addEventListener('click', () => setOrderMode('pickup'));
+    // Buttons on homepage
+    let homeDeliveryBtn = document.getElementById('deliveryPageBtn');
+    let homePickupBtn = document.getElementById('pickupPageBtn');
+    
+    if (homeDeliveryBtn && homePickupBtn) {
+        homeDeliveryBtn.onclick = function() {
+            homeDeliveryBtn.classList.add('active');
+            homePickupBtn.classList.remove('active');
+        };
+        
+        homePickupBtn.onclick = function() {
+            homePickupBtn.classList.add('active');
+            homeDeliveryBtn.classList.remove('active');
+        };
+    }
 }
 
-// ===== SHOPPING CART =====
-function initCart() {
-    const cartIcon = document.getElementById('cartIcon');
-    const cartModal = document.getElementById('cartModal');
-    const closeCart = document.getElementById('closeCart');
+// ==================== SHOPPING CART ====================
+function setupCart() {
+    // Load saved cart
+    let savedCart = localStorage.getItem('pizzaJerkCart');
+    if (savedCart) {
+        myCart = JSON.parse(savedCart);
+    }
     
-    // Load cart from localStorage
-    loadCart();
-    
-    // Open cart modal
+    // Cart icon opens modal
+    let cartIcon = document.getElementById('cartIcon');
     if (cartIcon) {
-        cartIcon.addEventListener('click', openCartModal);
+        cartIcon.onclick = function() {
+            showCartModal();
+        };
     }
     
-    // Close cart modal
-    if (closeCart) {
-        closeCart.addEventListener('click', () => {
-            cartModal.classList.remove('show');
-        });
+    // Close cart button
+    let closeBtn = document.getElementById('closeCart');
+    if (closeBtn) {
+        closeBtn.onclick = function() {
+            document.getElementById('cartModal').classList.remove('show');
+        };
     }
     
-    // Close modal when clicking outside
-    window.addEventListener('click', (e) => {
-        if (e.target === cartModal) {
-            cartModal.classList.remove('show');
+    // Click outside to close
+    window.onclick = function(event) {
+        let modal = document.getElementById('cartModal');
+        if (event.target === modal) {
+            modal.classList.remove('show');
         }
-    });
+    };
     
     // Checkout button
-    const checkoutBtn = document.getElementById('checkoutBtn');
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', () => {
-            if (cart.length === 0) {
-                alert('Your cart is empty!');
+    let checkout = document.getElementById('checkoutBtn');
+    if (checkout) {
+        checkout.onclick = function() {
+            if (myCart.length === 0) {
+                alert('Your cart is empty! Go get some pizza! 🍕');
                 return;
             }
             document.getElementById('cartModal').classList.remove('show');
             window.location.href = 'checkout.html';
-        });
+        };
     }
     
     // Reorder buttons
-    document.querySelectorAll('.reorder-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const orderNumber = this.getAttribute('data-order');
-            alert(`Reorder functionality for order #${orderNumber}\nThis would add all items from that order to your cart.`);
-        });
-    });
+    let reorderButtons = document.querySelectorAll('.reorder-btn');
+    for (let i = 0; i < reorderButtons.length; i++) {
+        reorderButtons[i].onclick = function() {
+            let orderNum = this.getAttribute('data-order');
+            alert('You want to reorder #' + orderNum + '? Coming soon! 😊');
+        };
+    }
 }
 
-// ===== CART FUNCTIONS =====
-function addItemToCart(product, price) {
-    const existingItem = cart.find(item => item.product === product);
+// Add item to cart
+function addToCart(productName, productPrice) {
+    // Check if item already in cart
+    let foundItem = null;
+    for (let i = 0; i < myCart.length; i++) {
+        if (myCart[i].product === productName) {
+            foundItem = myCart[i];
+            break;
+        }
+    }
     
-    if (existingItem) {
-        existingItem.quantity += 1;
+    if (foundItem) {
+        foundItem.quantity = foundItem.quantity + 1;
     } else {
-        cart.push({
-            product: product,
-            price: price,
+        myCart.push({
+            product: productName,
+            price: productPrice,
             quantity: 1
         });
     }
     
-    saveCart();
-    updateCartCount();
-    alert(`${product} added to cart!`);
+    // Save to browser
+    localStorage.setItem('pizzaJerkCart', JSON.stringify(myCart));
+    
+    showCartCount();
+    alert(productName + ' added to cart! 🍕');
 }
 
-window.removeFromCart = function(index) {
-    cart.splice(index, 1);
-    saveCart();
-    updateCartCount();
-    openCartModal();
-};
+// Remove item from cart
+function removeFromCart(indexNumber) {
+    myCart.splice(indexNumber, 1);
+    localStorage.setItem('pizzaJerkCart', JSON.stringify(myCart));
+    showCartCount();
+    showCartModal();
+}
 
-window.updateQuantity = function(index, change) {
-    if (cart[index]) {
-        cart[index].quantity += change;
+// Change quantity
+function changeQuantity(indexNumber, changeAmount) {
+    if (myCart[indexNumber]) {
+        myCart[indexNumber].quantity = myCart[indexNumber].quantity + changeAmount;
         
-        if (cart[index].quantity <= 0) {
-            cart.splice(index, 1);
+        if (myCart[indexNumber].quantity <= 0) {
+            myCart.splice(indexNumber, 1);
         }
         
-        saveCart();
-        updateCartCount();
-        openCartModal();
-    }
-};
-
-function updateCartCount() {
-    const cartCount = document.getElementById('cartCount');
-    if (cartCount) {
-        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-        cartCount.textContent = totalItems;
-        cartCount.style.display = totalItems === 0 ? 'none' : 'flex';
+        localStorage.setItem('pizzaJerkCart', JSON.stringify(myCart));
+        showCartCount();
+        showCartModal();
     }
 }
 
-function openCartModal() {
-    const cartModal = document.getElementById('cartModal');
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
+// Update the cart number badge
+function showCartCount() {
+    let cartBadge = document.getElementById('cartCount');
+    if (cartBadge) {
+        let totalItems = 0;
+        for (let i = 0; i < myCart.length; i++) {
+            totalItems = totalItems + myCart[i].quantity;
+        }
+        cartBadge.innerHTML = totalItems;
+        
+        if (totalItems === 0) {
+            cartBadge.style.display = 'none';
+        } else {
+            cartBadge.style.display = 'flex';
+        }
+    }
+}
+
+// Show cart modal with items
+function showCartModal() {
+    let modal = document.getElementById('cartModal');
+    let itemsDiv = document.getElementById('cartItems');
+    let totalSpan = document.getElementById('cartTotal');
     
-    if (cartModal) {
-        if (cartItems) {
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
+    if (modal) {
+        if (itemsDiv) {
+            if (myCart.length === 0) {
+                itemsDiv.innerHTML = '<p style="text-align: center;">Your cart is empty</p>';
             } else {
-                let html = '';
-                let total = 0;
+                let htmlString = '';
+                let totalPrice = 0;
                 
-                cart.forEach((item, index) => {
-                    const itemTotal = item.price * item.quantity;
-                    total += itemTotal;
+                for (let i = 0; i < myCart.length; i++) {
+                    let item = myCart[i];
+                    let itemTotal = item.price * item.quantity;
+                    totalPrice = totalPrice + itemTotal;
                     
-                    html += `
-                        <div class="cart-item">
-                            <div class="cart-item-info">
-                                <h4>${item.product}</h4>
-                                <p class="cart-item-price">$${item.price.toFixed(2)} each</p>
-                            </div>
-                            <div class="cart-item-actions">
-                                <div class="cart-item-quantity">
-                                    <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
-                                    <span>${item.quantity}</span>
-                                    <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                    htmlString = htmlString + `
+                        <div style="border-bottom: 1px solid #eee; padding: 10px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>
+                                    <h4 style="margin: 0;">${item.product}</h4>
+                                    <p style="margin: 5px 0;">$${item.price.toFixed(2)} each</p>
                                 </div>
-                                <span class="cart-item-total">$${itemTotal.toFixed(2)}</span>
-                                <button class="remove-item" onclick="removeFromCart(${index})">×</button>
+                                <div style="text-align: right;">
+                                    <div style="display: flex; align-items: center; gap: 5px;">
+                                        <button onclick="changeQuantity(${i}, -1)" style="width: 30px; height: 30px;">-</button>
+                                        <span>${item.quantity}</span>
+                                        <button onclick="changeQuantity(${i}, 1)" style="width: 30px; height: 30px;">+</button>
+                                    </div>
+                                    <p><strong>$${itemTotal.toFixed(2)}</strong></p>
+                                    <button onclick="removeFromCart(${i})" style="color: red; border: none; background: none;">Remove</button>
+                                </div>
                             </div>
                         </div>
                     `;
-                });
+                }
                 
-                cartItems.innerHTML = html;
-                if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
+                itemsDiv.innerHTML = htmlString;
+                if (totalSpan) {
+                    totalSpan.innerHTML = '$' + totalPrice.toFixed(2);
+                }
             }
         }
         
-        cartModal.classList.add('show');
+        modal.classList.add('show');
     }
 }
 
-function saveCart() {
-    localStorage.setItem('pizzaJerkCart', JSON.stringify(cart));
+// Clear whole cart
+function clearWholeCart() {
+    myCart = [];
+    localStorage.setItem('pizzaJerkCart', JSON.stringify(myCart));
+    showCartCount();
 }
 
-function loadCart() {
-    const savedCart = localStorage.getItem('pizzaJerkCart');
-    if (savedCart) {
-        cart = JSON.parse(savedCart);
-    }
-}
-
-window.clearCart = function() {
-    cart = [];
-    saveCart();
-    updateCartCount();
-};
-
-// ===== FAQ ACCORDION =====
-function initFAQ() {
-    document.querySelectorAll('.faq-question').forEach((question, index) => {
-        question.addEventListener('click', function() {
-            const answer = document.getElementById(`faq${index + 1}Answer`);
-            const icon = this.querySelector('.faq-icon');
+// ==================== FAQ SECTION ====================
+function setupQuestions() {
+    let questions = document.querySelectorAll('.faq-question');
+    
+    for (let i = 0; i < questions.length; i++) {
+        questions[i].onclick = function() {
+            // Find the answer (next element)
+            let answer = this.nextElementSibling;
+            let icon = this.querySelector('.faq-icon');
             
             if (answer) {
-                answer.classList.toggle('open');
-                if (icon) icon.textContent = answer.classList.contains('open') ? '−' : '+';
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    if (icon) icon.innerHTML = '+';
+                } else {
+                    answer.style.display = 'block';
+                    if (icon) icon.innerHTML = '−';
+                }
             }
-        });
-    });
+        };
+    }
 }
 
-// ===== TESTIMONIALS SLIDER =====
-function initTestimonials() {
-    const dots = document.querySelectorAll('.dot');
-    const testimonials = document.querySelectorAll('.testimonial-card');
+// ==================== REVIEWS SLIDER ====================
+function setupReviews() {
+    let dots = document.querySelectorAll('.dot');
+    let reviews = document.querySelectorAll('.testimonial-card');
     
-    if (dots.length && testimonials.length) {
-        dots.forEach(dot => {
-            dot.addEventListener('click', function() {
-                const index = parseInt(this.getAttribute('data-index'));
+    if (dots.length > 0 && reviews.length > 0) {
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].onclick = function() {
+                let index = this.getAttribute('data-index');
+                index = parseInt(index);
                 
-                testimonials.forEach(t => t.classList.remove('active'));
-                dots.forEach(d => d.classList.remove('active'));
+                // Hide all reviews
+                for (let j = 0; j < reviews.length; j++) {
+                    reviews[j].classList.remove('active');
+                    dots[j].classList.remove('active');
+                }
                 
-                testimonials[index].classList.add('active');
+                // Show selected review
+                reviews[index].classList.add('active');
                 this.classList.add('active');
-            });
-        });
+            };
+        }
         
-        // Auto-rotate every 5 seconds
-        let currentIndex = 0;
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % testimonials.length;
+        // Auto change every 5 seconds
+        let currentReview = 0;
+        setInterval(function() {
+            currentReview = currentReview + 1;
+            if (currentReview >= reviews.length) {
+                currentReview = 0;
+            }
             
-            testimonials.forEach(t => t.classList.remove('active'));
-            dots.forEach(d => d.classList.remove('active'));
+            for (let j = 0; j < reviews.length; j++) {
+                reviews[j].classList.remove('active');
+                dots[j].classList.remove('active');
+            }
             
-            testimonials[currentIndex].classList.add('active');
-            dots[currentIndex].classList.add('active');
+            reviews[currentReview].classList.add('active');
+            dots[currentReview].classList.add('active');
         }, 5000);
     }
 }
 
-// ===== FORM HANDLING =====
-function initForms() {
+// ==================== FORMS ====================
+function setupForms() {
     // Contact form
-    const contactForm = document.getElementById('contactForm');
-    const formSuccess = document.getElementById('formSuccess');
-    
+    let contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        contactForm.onsubmit = function(event) {
+            event.preventDefault();
             contactForm.style.display = 'none';
-            if (formSuccess) formSuccess.style.display = 'block';
-        });
+            document.getElementById('formSuccess').style.display = 'block';
+        };
     }
     
     // Login form
-    const loginForm = document.getElementById('loginForm');
-    const loginSuccess = document.getElementById('loginSuccess');
-    
+    let loginForm = document.getElementById('loginForm');
     if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        loginForm.onsubmit = function(event) {
+            event.preventDefault();
             
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
             
-            if (!email || !password) {
-                alert('Please fill in all fields');
+            if (email === '' || password === '') {
+                alert('Please fill in both email and password!');
                 return;
             }
             
             loginForm.style.display = 'none';
-            if (loginSuccess) {
-                loginSuccess.style.display = 'block';
-                setTimeout(() => window.location.href = 'account.html', 2000);
-            }
-        });
+            document.getElementById('loginSuccess').style.display = 'block';
+            
+            setTimeout(function() {
+                window.location.href = 'account.html';
+            }, 2000);
+        };
     }
     
     // Signup form
-    const signupForm = document.getElementById('signupForm');
-    const signupSuccess = document.getElementById('signupSuccess');
-    
+    let signupForm = document.getElementById('signupForm');
     if (signupForm) {
-        signupForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        signupForm.onsubmit = function(event) {
+            event.preventDefault();
             
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const terms = document.getElementById('terms').checked;
+            let firstName = document.getElementById('firstName').value;
+            let lastName = document.getElementById('lastName').value;
+            let email = document.getElementById('email').value;
+            let phone = document.getElementById('phone').value;
+            let password = document.getElementById('password').value;
+            let confirmPass = document.getElementById('confirmPassword').value;
+            let termsChecked = document.getElementById('terms').checked;
             
-            if (!firstName || !lastName || !email || !phone || !password || !confirmPassword) {
-                alert('Please fill in all required fields');
+            if (firstName === '' || lastName === '' || email === '' || phone === '' || password === '' || confirmPass === '') {
+                alert('Please fill in all fields!');
                 return;
             }
             
             if (password.length < 8) {
-                alert('Password must be at least 8 characters');
+                alert('Password needs to be at least 8 characters!');
                 return;
             }
             
-            if (password !== confirmPassword) {
-                alert('Passwords do not match');
+            if (password !== confirmPass) {
+                alert('Passwords do not match!');
                 return;
             }
             
-            if (!terms) {
-                alert('You must agree to the Terms and Conditions');
+            if (!termsChecked) {
+                alert('You must agree to the Terms and Conditions!');
                 return;
             }
             
             signupForm.style.display = 'none';
-            if (signupSuccess) signupSuccess.style.display = 'block';
-        });
+            document.getElementById('signupSuccess').style.display = 'block';
+        };
     }
     
     // Profile form
-    const profileForm = document.querySelector('.profile-form');
+    let profileForm = document.querySelector('.profile-form');
     if (profileForm) {
-        profileForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Profile updated successfully!');
-        });
+        profileForm.onsubmit = function(event) {
+            event.preventDefault();
+            alert('Profile updated! 👍');
+        };
     }
     
-    // Address and payment buttons
-    const addAddressBtn = document.querySelector('.add-address-btn');
-    if (addAddressBtn) {
-        addAddressBtn.addEventListener('click', () => alert('Add new address form would open here'));
+    // Address button
+    let addAddress = document.querySelector('.add-address-btn');
+    if (addAddress) {
+        addAddress.onclick = function() {
+            alert('Add new address form would open here');
+        };
     }
     
-    const addPaymentBtn = document.querySelector('.add-payment-btn');
-    if (addPaymentBtn) {
-        addPaymentBtn.addEventListener('click', () => alert('Add payment method form would open here'));
+    // Payment button
+    let addPayment = document.querySelector('.add-payment-btn');
+    if (addPayment) {
+        addPayment.onclick = function() {
+            alert('Add payment method form would open here');
+        };
     }
     
     // Location search
-    const searchBtn = document.getElementById('searchBtn');
+    let searchBtn = document.getElementById('searchBtn');
     if (searchBtn) {
-        searchBtn.addEventListener('click', function() {
-            const searchInput = document.getElementById('locationSearch').value;
-            alert(searchInput ? `Searching for locations near: ${searchInput}` : 'Please enter a location');
-        });
+        searchBtn.onclick = function() {
+            let location = document.getElementById('locationSearch').value;
+            if (location) {
+                alert('Searching for locations near: ' + location);
+            } else {
+                alert('Please enter a location');
+            }
+        };
     }
     
     // Use my location
-    const useLocationBtn = document.getElementById('useMyLocation');
-    if (useLocationBtn) {
-        useLocationBtn.addEventListener('click', () => alert('Getting your current location...'));
+    let locationBtn = document.getElementById('useMyLocation');
+    if (locationBtn) {
+        locationBtn.onclick = function() {
+            alert('Getting your location... 📍');
+        };
     }
-    
-    // Order buttons
-    document.querySelectorAll('.order-delivery-btn, .order-pickup-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const store = this.getAttribute('data-store');
-            alert(`Ordering from ${store}`);
-            window.location.href = 'menu.html';
-        });
-    });
 }
 
-// ===== TAB SWITCHING =====
-function initTabs() {
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
+// ==================== TABS ====================
+function setupTabs() {
+    let tabButtons = document.querySelectorAll('.tab-btn');
+    let tabContents = document.querySelectorAll('.tab-content');
     
-    if (tabBtns.length && tabContents.length) {
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const tabId = this.getAttribute('data-tab');
+    if (tabButtons.length > 0 && tabContents.length > 0) {
+        for (let i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].onclick = function() {
+                let tabId = this.getAttribute('data-tab');
                 
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
+                // Remove active class from all
+                for (let j = 0; j < tabButtons.length; j++) {
+                    tabButtons[j].classList.remove('active');
+                    tabContents[j].classList.remove('active');
+                }
                 
+                // Add active class to clicked
                 this.classList.add('active');
-                
-                const activeTab = document.getElementById(tabId + 'Tab');
-                if (activeTab) activeTab.classList.add('active');
-            });
-        });
+                document.getElementById(tabId + 'Tab').classList.add('active');
+            };
+        }
     }
 }
 
-// ===== BUILD YOUR OWN PIZZA =====
-function initBuildYourOwn() {
-    const sizeRadios = document.querySelectorAll('input[name="size"]');
-    const crustRadios = document.querySelectorAll('input[name="crust"]');
-    const toppingCheckboxes = document.querySelectorAll('input[name="topping"]');
-    const buildPrice = document.getElementById('buildPrice');
-    const addCustomPizza = document.getElementById('addCustomPizza');
+// ==================== BUILD YOUR OWN PIZZA ====================
+function setupPizzaBuilder() {
+    let sizeRadios = document.querySelectorAll('input[name="size"]');
+    let crustRadios = document.querySelectorAll('input[name="crust"]');
+    let toppingBoxes = document.querySelectorAll('input[name="topping"]');
+    let priceDisplay = document.getElementById('buildPrice');
+    let addButton = document.getElementById('addCustomPizza');
     
-    if (sizeRadios.length && buildPrice) {
-        const prices = { small: 8.99, medium: 10.99, large: 12.99 };
+    if (sizeRadios.length > 0 && priceDisplay) {
+        // Prices
+        let sizePrices = {
+            small: 8.99,
+            medium: 10.99,
+            large: 12.99
+        };
         
-        function calculatePrice() {
+        function getTotalPrice() {
+            // Get size
             let selectedSize = 'small';
-            sizeRadios.forEach(radio => { if (radio.checked) selectedSize = radio.value; });
+            for (let i = 0; i < sizeRadios.length; i++) {
+                if (sizeRadios[i].checked) {
+                    selectedSize = sizeRadios[i].value;
+                    break;
+                }
+            }
             
-            let total = prices[selectedSize];
+            let total = sizePrices[selectedSize];
             
-            crustRadios.forEach(radio => {
-                if (radio.checked && radio.value === 'stuffed') total += 2.00;
-            });
+            // Check crust
+            for (let i = 0; i < crustRadios.length; i++) {
+                if (crustRadios[i].checked && crustRadios[i].value === 'stuffed') {
+                    total = total + 2.00;
+                    break;
+                }
+            }
             
-            toppingCheckboxes.forEach(checkbox => {
-                if (checkbox.checked) total += 1.00;
-            });
+            // Add toppings
+            for (let i = 0; i < toppingBoxes.length; i++) {
+                if (toppingBoxes[i].checked) {
+                    total = total + 1.00;
+                }
+            }
             
             return total;
         }
         
-        function updatePrice() {
-            buildPrice.textContent = `$${calculatePrice().toFixed(2)}`;
+        function updatePriceDisplay() {
+            priceDisplay.innerHTML = '$' + getTotalPrice().toFixed(2);
         }
         
-        sizeRadios.forEach(radio => radio.addEventListener('change', updatePrice));
-        crustRadios.forEach(radio => radio.addEventListener('change', updatePrice));
-        toppingCheckboxes.forEach(checkbox => checkbox.addEventListener('change', updatePrice));
+        // Add event listeners
+        for (let i = 0; i < sizeRadios.length; i++) {
+            sizeRadios[i].addEventListener('change', updatePriceDisplay);
+        }
+        for (let i = 0; i < crustRadios.length; i++) {
+            crustRadios[i].addEventListener('change', updatePriceDisplay);
+        }
+        for (let i = 0; i < toppingBoxes.length; i++) {
+            toppingBoxes[i].addEventListener('change', updatePriceDisplay);
+        }
         
-        if (addCustomPizza) {
-            addCustomPizza.addEventListener('click', function() {
-                let size = 'small', crust = 'original', sauce = 'marinara';
-                sizeRadios.forEach(radio => { if (radio.checked) size = radio.value; });
-                crustRadios.forEach(radio => { if (radio.checked) crust = radio.value; });
+        if (addButton) {
+            addButton.onclick = function() {
+                // Get size
+                let pizzaSize = 'small';
+                for (let i = 0; i < sizeRadios.length; i++) {
+                    if (sizeRadios[i].checked) {
+                        pizzaSize = sizeRadios[i].value;
+                        break;
+                    }
+                }
                 
-                document.querySelectorAll('input[name="sauce"]').forEach(radio => {
-                    if (radio.checked) sauce = radio.value;
-                });
+                // Get crust
+                let pizzaCrust = 'original';
+                for (let i = 0; i < crustRadios.length; i++) {
+                    if (crustRadios[i].checked) {
+                        pizzaCrust = crustRadios[i].value;
+                        break;
+                    }
+                }
                 
-                const toppings = [];
-                toppingCheckboxes.forEach(checkbox => {
-                    if (checkbox.checked) toppings.push(checkbox.value);
-                });
+                // Get sauce
+                let pizzaSauce = 'marinara';
+                let sauceRadios = document.querySelectorAll('input[name="sauce"]');
+                for (let i = 0; i < sauceRadios.length; i++) {
+                    if (sauceRadios[i].checked) {
+                        pizzaSauce = sauceRadios[i].value;
+                        break;
+                    }
+                }
                 
-                const total = calculatePrice();
-                let productName = `Custom ${size} ${crust} crust pizza with ${sauce}`;
-                if (toppings.length > 0) productName += ` and ${toppings.join(', ')}`;
+                // Get toppings
+                let pizzaToppings = [];
+                for (let i = 0; i < toppingBoxes.length; i++) {
+                    if (toppingBoxes[i].checked) {
+                        pizzaToppings.push(toppingBoxes[i].value);
+                    }
+                }
                 
-                addItemToCart(productName, total);
-            });
+                let finalPrice = getTotalPrice();
+                let pizzaName = 'Custom ' + pizzaSize + ' ' + pizzaCrust + ' crust pizza with ' + pizzaSauce;
+                
+                if (pizzaToppings.length > 0) {
+                    pizzaName = pizzaName + ' and ' + pizzaToppings.join(', ');
+                }
+                
+                addToCart(pizzaName, finalPrice);
+            };
         }
     }
 }
 
-// ===== HOMEPAGE FEATURES =====
-function initHomepageFeatures() {
+// ==================== HOMEPAGE ====================
+function setupHomepage() {
     // Find Stores button
-    const findStoresBtn = document.getElementById('findStoresBtn');
-    if (findStoresBtn) {
-        findStoresBtn.addEventListener('click', function() {
-            const address = document.getElementById('deliveryAddress').value;
+    let findStores = document.getElementById('findStoresBtn');
+    if (findStores) {
+        findStores.onclick = function() {
+            let address = document.getElementById('deliveryAddress').value;
             if (address.trim() === '') {
                 alert('Please enter your address');
                 return;
             }
             localStorage.setItem('deliveryAddress', address);
             window.location.href = 'order-online.html?mode=delivery';
-        });
+        };
     }
     
     // Search Stores button
-    const searchStoresBtn = document.getElementById('searchStoresBtn');
-    if (searchStoresBtn) {
-        searchStoresBtn.addEventListener('click', function() {
-            const location = document.getElementById('pickupLocation').value;
-            const storeList = document.getElementById('storeList');
+    let searchStores = document.getElementById('searchStoresBtn');
+    if (searchStores) {
+        searchStores.onclick = function() {
+            let location = document.getElementById('pickupLocation').value;
+            let storeList = document.getElementById('storeList');
             
             if (location.trim() === '') {
                 alert('Please enter your location');
@@ -553,333 +645,382 @@ function initHomepageFeatures() {
             
             if (storeList) {
                 storeList.innerHTML = `
-                    <div class="store-item">
+                    <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px;">
                         <h4>Pizza Jerk Downtown</h4>
                         <p>123 Main St - 0.8 miles away</p>
-                        <button class="btn btn-secondary select-store-btn" data-store="Downtown">Select Store</button>
+                        <button class="btn btn-secondary" onclick="selectStore('Downtown')">Select Store</button>
                     </div>
-                    <div class="store-item">
+                    <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px;">
                         <h4>Pizza Jerk Mall</h4>
                         <p>456 Shopping Ave - 1.2 miles away</p>
-                        <button class="btn btn-secondary select-store-btn" data-store="Mall">Select Store</button>
+                        <button class="btn btn-secondary" onclick="selectStore('Mall')">Select Store</button>
                     </div>
-                    <div class="store-item">
+                    <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px;">
                         <h4>Pizza Jerk University</h4>
                         <p>789 College Blvd - 2.3 miles away</p>
-                        <button class="btn btn-secondary select-store-btn" data-store="University">Select Store</button>
+                        <button class="btn btn-secondary" onclick="selectStore('University')">Select Store</button>
                     </div>
                 `;
-                
-                document.querySelectorAll('.select-store-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const store = this.getAttribute('data-store');
-                        localStorage.setItem('selectedStore', store);
-                        alert(`Store selected: ${store}`);
-                        window.location.href = 'menu.html';
-                    });
-                });
             }
-        });
+        };
     }
 }
 
-// ===== CHECKOUT PAGE FUNCTIONS =====
-function initCheckoutPage() {
-    if (!window.location.pathname.includes('checkout.html')) return;
-    
-    loadCheckoutCart();
-    
-    // Delivery/Pickup toggle
-    const deliveryRadio = document.getElementById('deliveryTypeDelivery');
-    const pickupRadio = document.getElementById('deliveryTypePickup');
-    const deliveryForm = document.getElementById('deliveryAddressForm');
-    const pickupForm = document.getElementById('pickupStoreForm');
-    const deliveryEstimateText = document.getElementById('deliveryEstimateText');
-    const deliveryFeeElement = document.getElementById('deliveryFee');
-    
-    if (deliveryRadio && pickupRadio) {
-        deliveryRadio.addEventListener('change', function() {
-            if (this.checked) {
-                deliveryForm.style.display = 'block';
-                pickupForm.style.display = 'none';
-                deliveryEstimateText.textContent = 'Estimated delivery: 30-45 minutes';
-                deliveryFeeElement.textContent = '$2.99';
-                updateTotals();
-            }
-        });
-        
-        pickupRadio.addEventListener('change', function() {
-            if (this.checked) {
-                deliveryForm.style.display = 'none';
-                pickupForm.style.display = 'block';
-                deliveryEstimateText.textContent = 'Ready for pickup in 15-20 minutes';
-                deliveryFeeElement.textContent = '$0.00';
-                updateTotals();
-            }
-        });
-    }
-    
-    // Payment method toggle
-    const cardRadio = document.getElementById('paymentCard');
-    const paypalRadio = document.getElementById('paymentPaypal');
-    const cashRadio = document.getElementById('paymentCash');
-    const cardForm = document.getElementById('cardPaymentForm');
-    const paypalMessage = document.getElementById('paypalMessage');
-    const cashMessage = document.getElementById('cashMessage');
-    
-    if (cardRadio && paypalRadio && cashRadio) {
-        cardRadio.addEventListener('change', function() {
-            if (this.checked) {
-                cardForm.style.display = 'block';
-                paypalMessage.style.display = 'none';
-                cashMessage.style.display = 'none';
-            }
-        });
-        
-        paypalRadio.addEventListener('change', function() {
-            if (this.checked) {
-                cardForm.style.display = 'none';
-                paypalMessage.style.display = 'block';
-                cashMessage.style.display = 'none';
-            }
-        });
-        
-        cashRadio.addEventListener('change', function() {
-            if (this.checked) {
-                cardForm.style.display = 'none';
-                paypalMessage.style.display = 'none';
-                cashMessage.style.display = 'block';
-            }
-        });
-    }
-    
-    // Apply promo code
-    const applyPromoBtn = document.getElementById('applyPromoBtn');
-    if (applyPromoBtn) {
-        applyPromoBtn.addEventListener('click', function() {
-            const promoCode = document.getElementById('promoCode').value.trim().toUpperCase();
-            const promoMessage = document.getElementById('promoMessage');
-            const discountRow = document.getElementById('discountRow');
-            const discountAmount = document.getElementById('discountAmount');
-            
-            if (promoCode === 'PIZZA20') {
-                const subtotal = parseFloat(document.getElementById('subtotal').textContent.replace('$', ''));
-                const discount = subtotal * 0.2;
-                discountAmount.textContent = '-$' + discount.toFixed(2);
-                discountRow.style.display = 'flex';
-                promoMessage.textContent = 'Promo code applied! 20% off';
-                promoMessage.style.color = '#4CAF50';
-                updateTotals();
-            } else if (promoCode === 'FREEDELIVERY') {
-                document.getElementById('deliveryFee').textContent = '$0.00';
-                promoMessage.textContent = 'Free delivery applied!';
-                promoMessage.style.color = '#4CAF50';
-                updateTotals();
-            } else if (promoCode === '') {
-                promoMessage.textContent = 'Please enter a promo code';
-                promoMessage.style.color = '#e31837';
-            } else {
-                promoMessage.textContent = 'Invalid promo code';
-                promoMessage.style.color = '#e31837';
-            }
-        });
-    }
-    
-    // Input formatting
-    const cardNumber = document.getElementById('cardNumber');
-    if (cardNumber) {
-        cardNumber.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\s/g, '');
-            if (value.length > 0) {
-                value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
-            }
-            e.target.value = value;
-        });
-    }
-    
-    const expiryDate = document.getElementById('expiryDate');
-    if (expiryDate) {
-        expiryDate.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            }
-            e.target.value = value;
-        });
-    }
-    
-    const cvv = document.getElementById('cvv');
-    if (cvv) {
-        cvv.addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
-    }
-    
-    // Place order button
-    const placeOrderBtn = document.getElementById('placeOrderBtn');
-    if (placeOrderBtn) {
-        placeOrderBtn.addEventListener('click', processOrder);
-    }
+// Helper function for selecting store
+function selectStore(storeName) {
+    localStorage.setItem('selectedStore', storeName);
+    alert('Store selected: ' + storeName);
+    window.location.href = 'menu.html';
 }
 
-function loadCheckoutCart() {
-    const orderItemsContainer = document.getElementById('orderItems');
-    const subtotalElement = document.getElementById('subtotal');
-    const taxElement = document.getElementById('tax');
-    const totalElement = document.getElementById('totalAmount');
-    
-    if (!orderItemsContainer) return;
-    
-    if (cart.length === 0) {
-        orderItemsContainer.innerHTML = '<p class="empty-cart-message">Your cart is empty. <a href="menu.html">Browse menu</a></p>';
-        if (subtotalElement) subtotalElement.textContent = '$0.00';
-        if (taxElement) taxElement.textContent = '$0.00';
-        if (totalElement) totalElement.textContent = '$0.00';
+// ==================== CHECKOUT PAGE ====================
+function setupCheckout() {
+    // Check if we're on checkout page
+    if (!window.location.pathname.includes('checkout.html')) {
         return;
     }
     
-    let html = '';
+    loadCheckoutItems();
+    
+    // Delivery/Pickup toggle
+    let deliveryRadio = document.getElementById('deliveryTypeDelivery');
+    let pickupRadio = document.getElementById('deliveryTypePickup');
+    let deliveryForm = document.getElementById('deliveryAddressForm');
+    let pickupForm = document.getElementById('pickupStoreForm');
+    let estimateText = document.getElementById('deliveryEstimateText');
+    let deliveryFee = document.getElementById('deliveryFee');
+    
+    if (deliveryRadio && pickupRadio) {
+        deliveryRadio.onclick = function() {
+            if (this.checked) {
+                deliveryForm.style.display = 'block';
+                pickupForm.style.display = 'none';
+                estimateText.innerHTML = 'Estimated delivery: 30-45 minutes';
+                deliveryFee.innerHTML = '$2.99';
+                updateCheckoutTotals();
+            }
+        };
+        
+        pickupRadio.onclick = function() {
+            if (this.checked) {
+                deliveryForm.style.display = 'none';
+                pickupForm.style.display = 'block';
+                estimateText.innerHTML = 'Ready for pickup in 15-20 minutes';
+                deliveryFee.innerHTML = '$0.00';
+                updateCheckoutTotals();
+            }
+        };
+    }
+    
+    // Payment method toggle
+    let cardRadio = document.getElementById('paymentCard');
+    let paypalRadio = document.getElementById('paymentPaypal');
+    let cashRadio = document.getElementById('paymentCash');
+    let cardForm = document.getElementById('cardPaymentForm');
+    let paypalMsg = document.getElementById('paypalMessage');
+    let cashMsg = document.getElementById('cashMessage');
+    
+    if (cardRadio && paypalRadio && cashRadio) {
+        cardRadio.onclick = function() {
+            if (this.checked) {
+                cardForm.style.display = 'block';
+                paypalMsg.style.display = 'none';
+                cashMsg.style.display = 'none';
+            }
+        };
+        
+        paypalRadio.onclick = function() {
+            if (this.checked) {
+                cardForm.style.display = 'none';
+                paypalMsg.style.display = 'block';
+                cashMsg.style.display = 'none';
+            }
+        };
+        
+        cashRadio.onclick = function() {
+            if (this.checked) {
+                cardForm.style.display = 'none';
+                paypalMsg.style.display = 'none';
+                cashMsg.style.display = 'block';
+            }
+        };
+    }
+    
+    // Promo code button
+    let promoBtn = document.getElementById('applyPromoBtn');
+    if (promoBtn) {
+        promoBtn.onclick = function() {
+            let code = document.getElementById('promoCode').value;
+            code = code.trim().toUpperCase();
+            let message = document.getElementById('promoMessage');
+            let discountRow = document.getElementById('discountRow');
+            let discountAmount = document.getElementById('discountAmount');
+            
+            if (code === 'PIZZA20') {
+                let subtotalText = document.getElementById('subtotal').innerHTML;
+                let subtotal = parseFloat(subtotalText.replace('$', ''));
+                let discount = subtotal * 0.2;
+                discountAmount.innerHTML = '-$' + discount.toFixed(2);
+                discountRow.style.display = 'flex';
+                message.innerHTML = 'Promo code applied! 20% off';
+                message.style.color = 'green';
+                updateCheckoutTotals();
+            } 
+            else if (code === 'FREEDELIVERY') {
+                document.getElementById('deliveryFee').innerHTML = '$0.00';
+                message.innerHTML = 'Free delivery applied!';
+                message.style.color = 'green';
+                updateCheckoutTotals();
+            } 
+            else if (code === '') {
+                message.innerHTML = 'Please enter a promo code';
+                message.style.color = 'red';
+            } 
+            else {
+                message.innerHTML = 'Invalid promo code';
+                message.style.color = 'red';
+            }
+        };
+    }
+    
+    // Credit card formatting
+    let cardNumber = document.getElementById('cardNumber');
+    if (cardNumber) {
+        cardNumber.oninput = function() {
+            let value = this.value.replace(/\s/g, '');
+            if (value.length > 0) {
+                // Add space every 4 digits
+                let newValue = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) {
+                        newValue = newValue + ' ';
+                    }
+                    newValue = newValue + value[i];
+                }
+                this.value = newValue;
+            }
+        };
+    }
+    
+    // Expiry date formatting
+    let expiry = document.getElementById('expiryDate');
+    if (expiry) {
+        expiry.oninput = function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            this.value = value;
+        };
+    }
+    
+    // CVV - numbers only
+    let cvv = document.getElementById('cvv');
+    if (cvv) {
+        cvv.oninput = function() {
+            this.value = this.value.replace(/\D/g, '');
+        };
+    }
+    
+    // Place order button
+    let placeOrder = document.getElementById('placeOrderBtn');
+    if (placeOrder) {
+        placeOrder.onclick = function() {
+            placeMyOrder();
+        };
+    }
+}
+
+// Load items on checkout page
+function loadCheckoutItems() {
+    let itemsDiv = document.getElementById('orderItems');
+    let subtotalSpan = document.getElementById('subtotal');
+    let taxSpan = document.getElementById('tax');
+    let totalSpan = document.getElementById('totalAmount');
+    
+    if (!itemsDiv) return;
+    
+    if (myCart.length === 0) {
+        itemsDiv.innerHTML = '<p>Your cart is empty. <a href="menu.html">Order some pizza!</a></p>';
+        if (subtotalSpan) subtotalSpan.innerHTML = '$0.00';
+        if (taxSpan) taxSpan.innerHTML = '$0.00';
+        if (totalSpan) totalSpan.innerHTML = '$0.00';
+        return;
+    }
+    
+    let htmlCode = '';
     let subtotal = 0;
     
-    cart.forEach((item) => {
-        const itemTotal = item.price * item.quantity;
-        subtotal += itemTotal;
+    for (let i = 0; i < myCart.length; i++) {
+        let item = myCart[i];
+        let itemTotal = item.price * item.quantity;
+        subtotal = subtotal + itemTotal;
         
-        html += `
-            <div class="order-item">
-                <div class="order-item-info">
-                    <span class="order-item-name">${item.product}</span>
-                    <span class="order-item-quantity">x${item.quantity}</span>
+        htmlCode = htmlCode + `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <div>
+                    <span>${item.product}</span>
+                    <span style="color: #666;"> x${item.quantity}</span>
                 </div>
-                <span class="order-item-price">$${itemTotal.toFixed(2)}</span>
+                <span>$${itemTotal.toFixed(2)}</span>
             </div>
         `;
-    });
+    }
     
-    orderItemsContainer.innerHTML = html;
-    if (subtotalElement) subtotalElement.textContent = '$' + subtotal.toFixed(2);
+    itemsDiv.innerHTML = htmlCode;
+    if (subtotalSpan) subtotalSpan.innerHTML = '$' + subtotal.toFixed(2);
     
-    updateTotals();
+    updateCheckoutTotals();
 }
 
-function updateTotals() {
-    const subtotalElement = document.getElementById('subtotal');
-    const deliveryFeeElement = document.getElementById('deliveryFee');
-    const taxElement = document.getElementById('tax');
-    const discountRow = document.getElementById('discountRow');
-    const discountAmount = document.getElementById('discountAmount');
-    const totalElement = document.getElementById('totalAmount');
-    const confirmTotal = document.getElementById('confirmTotal');
+// Update totals on checkout page
+function updateCheckoutTotals() {
+    let subtotalSpan = document.getElementById('subtotal');
+    let deliverySpan = document.getElementById('deliveryFee');
+    let taxSpan = document.getElementById('tax');
+    let discountRow = document.getElementById('discountRow');
+    let discountSpan = document.getElementById('discountAmount');
+    let totalSpan = document.getElementById('totalAmount');
+    let confirmTotal = document.getElementById('confirmTotal');
     
-    if (!subtotalElement || !deliveryFeeElement || !taxElement || !totalElement) return;
+    if (!subtotalSpan || !deliverySpan || !taxSpan || !totalSpan) return;
     
-    const subtotal = parseFloat(subtotalElement.textContent.replace('$', '')) || 0;
-    const deliveryFee = parseFloat(deliveryFeeElement.textContent.replace('$', '')) || 0;
-    const discount = discountRow && discountRow.style.display !== 'none' ? 
-                     parseFloat(discountAmount.textContent.replace('-', '').replace('$', '')) || 0 : 0;
+    let subtotal = parseFloat(subtotalSpan.innerHTML.replace('$', ''));
+    if (isNaN(subtotal)) subtotal = 0;
     
-    const tax = (subtotal - discount) * 0.08;
-    taxElement.textContent = '$' + tax.toFixed(2);
+    let delivery = parseFloat(deliverySpan.innerHTML.replace('$', ''));
+    if (isNaN(delivery)) delivery = 0;
     
-    const total = subtotal + deliveryFee + tax - discount;
-    totalElement.textContent = '$' + total.toFixed(2);
+    let discount = 0;
+    if (discountRow && discountRow.style.display !== 'none') {
+        let discountText = discountSpan.innerHTML.replace('-', '').replace('$', '');
+        discount = parseFloat(discountText);
+        if (isNaN(discount)) discount = 0;
+    }
     
-    if (confirmTotal) confirmTotal.textContent = '$' + total.toFixed(2);
+    let tax = (subtotal - discount) * 0.08;
+    taxSpan.innerHTML = '$' + tax.toFixed(2);
+    
+    let total = subtotal + delivery + tax - discount;
+    totalSpan.innerHTML = '$' + total.toFixed(2);
+    
+    if (confirmTotal) {
+        confirmTotal.innerHTML = '$' + total.toFixed(2);
+    }
 }
 
-function processOrder() {
-    const isDelivery = document.getElementById('deliveryTypeDelivery').checked;
-    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-    const total = document.getElementById('totalAmount').textContent;
+// Place the order
+function placeMyOrder() {
+    // Check if delivery or pickup
+    let isDelivery = false;
+    let deliveryRadio = document.getElementById('deliveryTypeDelivery');
+    if (deliveryRadio) {
+        isDelivery = deliveryRadio.checked;
+    }
     
-    // Validate required fields (simplified for brevity)
-    let isValid = true;
-    let errorMessage = '';
+    // Get payment method
+    let paymentMethod = 'card';
+    let paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
+    for (let i = 0; i < paymentRadios.length; i++) {
+        if (paymentRadios[i].checked) {
+            paymentMethod = paymentRadios[i].value;
+            break;
+        }
+    }
     
-    const isDeliveryChecked = document.getElementById('deliveryTypeDelivery').checked;
+    let totalAmount = document.getElementById('totalAmount').innerHTML;
     
-    if (isDeliveryChecked) {
-        const requiredFields = ['firstName', 'lastName', 'address', 'city', 'state', 'zipCode', 'phone'];
-        for (const fieldId of requiredFields) {
-            const field = document.getElementById(fieldId);
-            if (!field || !field.value.trim()) {
-                isValid = false;
-                errorMessage = 'Please fill in all required delivery fields';
+    // Simple validation
+    let everythingOK = true;
+    let errorMsg = '';
+    
+    if (isDelivery) {
+        // Check delivery fields
+        let fields = ['firstName', 'lastName', 'address', 'city', 'state', 'zipCode', 'phone'];
+        for (let i = 0; i < fields.length; i++) {
+            let field = document.getElementById(fields[i]);
+            if (!field || field.value.trim() === '') {
+                everythingOK = false;
+                errorMsg = 'Please fill in all delivery info';
                 break;
             }
         }
     } else {
-        const storeField = document.getElementById('pickupStore');
-        if (!storeField || !storeField.value) {
-            isValid = false;
-            errorMessage = 'Please select a store for pickup';
+        let storeField = document.getElementById('pickupStore');
+        if (!storeField || storeField.value === '') {
+            everythingOK = false;
+            errorMsg = 'Please select a store for pickup';
         }
     }
     
     if (paymentMethod === 'card') {
-        const cardFields = ['cardName', 'cardNumber', 'expiryDate', 'cvv'];
-        for (const fieldId of cardFields) {
-            const field = document.getElementById(fieldId);
-            if (!field || !field.value.trim()) {
-                isValid = false;
-                errorMessage = 'Please fill in all card details';
+        let cardFields = ['cardName', 'cardNumber', 'expiryDate', 'cvv'];
+        for (let i = 0; i < cardFields.length; i++) {
+            let field = document.getElementById(cardFields[i]);
+            if (!field || field.value.trim() === '') {
+                everythingOK = false;
+                errorMsg = 'Please fill in all card details';
                 break;
             }
         }
     }
     
-    if (cart.length === 0) {
-        isValid = false;
-        errorMessage = 'Your cart is empty. Please add items before checking out.';
+    if (myCart.length === 0) {
+        everythingOK = false;
+        errorMsg = 'Your cart is empty!';
     }
     
-    if (!isValid) {
-        alert(errorMessage || 'Please fill in all required fields');
+    if (!everythingOK) {
+        alert(errorMsg || 'Please fill in all required fields');
         return;
     }
     
-    // Generate order number and show confirmation
-    const orderNumber = 'PH' + new Date().getFullYear() + '-' + Math.floor(Math.random() * 10000);
-    document.getElementById('orderNumber').textContent = '#' + orderNumber;
-    document.getElementById('confirmTotal').textContent = total;
+    // Create order number
+    let date = new Date();
+    let orderNumber = 'PJ' + date.getFullYear() + '-' + Math.floor(Math.random() * 10000);
     
-    const deliveryTime = isDelivery ? '30-45 minutes' : '15-20 minutes';
-    document.getElementById('confirmDeliveryTime').textContent = deliveryTime;
+    document.getElementById('orderNumber').innerHTML = '#' + orderNumber;
+    document.getElementById('confirmTotal').innerHTML = totalAmount;
     
-    // Save order to history
-    saveOrderToHistory({
+    let deliveryTime = isDelivery ? '30-45 minutes' : '15-20 minutes';
+    document.getElementById('confirmDeliveryTime').innerHTML = deliveryTime;
+    
+    // Save to order history
+    let oldOrders = localStorage.getItem('pizzaJerkOrders');
+    let allOrders = [];
+    if (oldOrders) {
+        allOrders = JSON.parse(oldOrders);
+    }
+    
+    let newOrder = {
         orderNumber: orderNumber,
-        date: new Date().toLocaleDateString(),
-        items: [...cart],
-        total: total,
+        date: date.toLocaleDateString(),
+        items: [...myCart],
+        total: totalAmount,
         deliveryType: isDelivery ? 'Delivery' : 'Pickup',
         paymentMethod: paymentMethod,
         status: 'Confirmed'
-    });
+    };
     
-    // Show confirmation modal
-    const modal = document.getElementById('confirmationModal');
-    if (modal) {
-        modal.style.display = 'flex';
-        
-        // Clear cart
-        cart = [];
-        saveCart();
-        updateCartCount();
+    allOrders.unshift(newOrder);
+    if (allOrders.length > 10) {
+        allOrders = allOrders.slice(0, 10);
     }
+    localStorage.setItem('pizzaJerkOrders', JSON.stringify(allOrders));
+    
+    // Show confirmation
+    document.getElementById('confirmationModal').style.display = 'flex';
+    
+    // Clear cart
+    myCart = [];
+    localStorage.setItem('pizzaJerkCart', JSON.stringify(myCart));
+    showCartCount();
 }
 
-function saveOrderToHistory(order) {
-    let orderHistory = JSON.parse(localStorage.getItem('pizzaJerkOrders')) || [];
-    orderHistory.unshift(order);
-    if (orderHistory.length > 10) orderHistory = orderHistory.slice(0, 10);
-    localStorage.setItem('pizzaJerkOrders', JSON.stringify(orderHistory));
-}
-
-// Close modal when clicking outside
-window.addEventListener('click', function(e) {
-    const modal = document.getElementById('confirmationModal');
-    if (e.target === modal) {
+// Close confirmation modal
+window.onclick = function(event) {
+    let modal = document.getElementById('confirmationModal');
+    if (event.target === modal) {
         modal.style.display = 'none';
     }
-});
+};
