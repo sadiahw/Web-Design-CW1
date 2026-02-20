@@ -16,7 +16,7 @@
 
 /* Set base font and colors */
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     color: #333;
@@ -684,8 +684,8 @@ p {
 }
 
 .menu-item-img {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
 }
 
