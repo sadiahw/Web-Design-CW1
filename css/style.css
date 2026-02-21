@@ -1030,14 +1030,18 @@ p {
     background-color: white;
 }
 
-.faq-answer.open {
+.faq-answer {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.faq-answer.open {  
     padding: 20px;
     max-height: 500px;
     border-top: 1px solid #ddd;
-}
-
-.faq-answer p {
-    margin-bottom: 0;
 }
 
 /* ===== ACCOUNT PAGE ===== */

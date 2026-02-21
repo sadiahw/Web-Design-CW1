@@ -291,23 +291,33 @@ function clearWholeCart() {
 }
 
 // ==================== FAQ SECTION ====================
+// ==================== FAQ SECTION ====================
+// ==================== FAQ SECTION ====================
+// ==================== FAQ SECTION ====================
 function setupQuestions() {
+    console.log("Setting up FAQ questions...");
     let questions = document.querySelectorAll('.faq-question');
+    console.log("Found " + questions.length + " questions");
     
     for (let i = 0; i < questions.length; i++) {
         questions[i].onclick = function() {
-            // Find the answer (next element)
+            console.log("Question clicked!");
             let answer = this.nextElementSibling;
             let icon = this.querySelector('.faq-icon');
             
             if (answer) {
-                if (answer.style.display === 'block') {
-                    answer.style.display = 'none';
+                // Toggle the 'open' class
+                if (answer.classList.contains('open')) {
+                    answer.classList.remove('open');
                     if (icon) icon.innerHTML = '+';
+                    console.log("Closing answer");
                 } else {
-                    answer.style.display = 'block';
+                    answer.classList.add('open');
                     if (icon) icon.innerHTML = '−';
+                    console.log("Opening answer");
                 }
+            } else {
+                console.log("No answer found!");
             }
         };
     }
